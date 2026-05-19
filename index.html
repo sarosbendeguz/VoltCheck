@@ -24,7 +24,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -38,7 +38,7 @@
   body { font-family: 'DM Sans', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; line-height: 1.6; }
 
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 3rem; background: rgba(10,10,10,0.88); backdrop-filter: blur(16px); border-bottom: 0.5px solid var(--border); gap: 1rem; }
-  .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.3rem; letter-spacing: -0.02em; color: var(--white); text-decoration: none; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.35rem; letter-spacing: -0.01em; color: var(--white); text-decoration: none; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
   .logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); animation: pulse 2.4s ease-in-out infinite; }
   @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(.85)} }
   .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
@@ -62,15 +62,58 @@
 
   .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 99; background: rgba(10,10,10,0.97); backdrop-filter: blur(20px); padding: 6rem 1.5rem 2rem; flex-direction: column; gap: 0.5rem; }
   .mobile-menu.open { display: flex; }
-  .mobile-menu a { display: block; padding: 1.1rem 0.25rem; border-bottom: 0.5px solid var(--border); font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 600; color: var(--white); text-decoration: none; letter-spacing: -0.01em; }
+  .mobile-menu a { display: block; padding: 1.1rem 0.25rem; border-bottom: 0.5px solid var(--border); font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 600; color: var(--white); text-decoration: none; letter-spacing: -0.01em; }
   .mobile-menu a:active { color: var(--accent); }
 
   .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 8rem 3rem 5rem; position: relative; overflow: hidden; }
   .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(26,122,74,0.18) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 10% 80%, rgba(200,240,101,0.06) 0%, transparent 60%); }
   .hero-grid { position: absolute; inset: 0; z-index: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%); }
+  .hero-visual { position: absolute; right: clamp(3rem, 9vw, 11rem); top: 50%; transform: translateY(-50%); width: clamp(340px, 32vw, 460px); z-index: 1; pointer-events: none; opacity: 0; animation: hero-visual-in 1.4s ease 0.4s forwards; }
+  .hero-visual svg { display: block; width: 100%; height: auto; }
+  @keyframes hero-visual-in { to { opacity: 1; } }
+  .hero-visual .cell-pulse { animation: cell-pulse 3.2s ease-in-out infinite; transform-origin: center; }
+  .hero-visual .cell-pulse-2 { animation-delay: 0.6s; }
+  .hero-visual .cell-pulse-3 { animation-delay: 1.2s; }
+  .hero-visual .cell-pulse-4 { animation-delay: 1.8s; }
+  .hero-visual .cell-pulse-5 { animation-delay: 2.4s; }
+  @keyframes cell-pulse { 0%,100% { opacity: 0.95; } 50% { opacity: 0.4; } }
+  .hero-visual .cell-flicker { animation: cell-flicker 6.4s steps(1, end) infinite; opacity: 0; }
+  .hero-visual .cell-flicker-2 { animation-delay: 2.1s; }
+  .hero-visual .cell-flicker-3 { animation-delay: 4.3s; }
+  @keyframes cell-flicker {
+    0%, 87%, 93%, 100% { opacity: 0; }
+    87.5% { opacity: 0.9; }
+    88.2% { opacity: 0.15; }
+    88.9% { opacity: 0.85; }
+    89.6% { opacity: 0.3; }
+    90.5% { opacity: 0.95; }
+    91.5% { opacity: 0.45; }
+    92.5% { opacity: 0.85; }
+  }
+  .hero-visual .halo { transform-origin: 240px 215px; animation: halo-breathe 6s ease-in-out infinite; }
+  @keyframes halo-breathe { 0%,100% { opacity: 0.85; transform: scale(1); } 50% { opacity: 1; transform: scale(1.04); } }
+  .hero-visual .scan { animation: scan-sweep 3.2s ease-in-out infinite alternate; }
+  @keyframes scan-sweep { from { transform: translate(0, 0); } to { transform: translate(160px, 100px); } }
+  .hero-visual .leader { animation: leader-flow 1.8s linear infinite; }
+  @keyframes leader-flow { to { stroke-dashoffset: -12; } }
+  .hero-visual .term-plus { animation: term-blink 2.6s ease-in-out infinite; }
+  @keyframes term-blink { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+  .hero-visual .ridge { animation: ridge-glow 4.2s ease-in-out infinite; }
+  @keyframes ridge-glow { 0%,100% { opacity: 0.55; } 50% { opacity: 1; } }
+  .hero-visual .chip { animation: chip-bob 4.8s ease-in-out infinite; }
+  @keyframes chip-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+  .hero-visual .spark { animation: spark-rise 4.2s ease-out infinite; opacity: 0; }
+  .hero-visual .spark-2 { animation-delay: 1.4s; }
+  .hero-visual .spark-3 { animation-delay: 2.8s; }
+  @keyframes spark-rise { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateY(-34px); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-visual *, .hero-visual { animation: none !important; }
+  }
+  @media (max-width: 1024px) { .hero-visual { display: none; } }
+
   .hero-tag { position: relative; z-index: 1; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 8px; margin-bottom: 1.5rem; }
   .hero-tag::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--accent); }
-  .hero h1 { position: relative; z-index: 1; font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.6rem, 6.5vw, 5.5rem); line-height: 1.05; letter-spacing: -0.03em; max-width: 16ch; margin-bottom: 1.5rem; }
+  .hero h1 { position: relative; z-index: 1; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 4.5rem; line-height: 1.05; letter-spacing: -0.03em; max-width: 16ch; margin-bottom: 1.5rem; }
   .hero h1 em { font-style: normal; color: var(--accent); }
   .hero-sub { position: relative; z-index: 1; font-size: 1.1rem; font-weight: 300; color: var(--gray); max-width: 46ch; line-height: 1.7; margin-bottom: 2.5rem; }
   .hero-actions { position: relative; z-index: 1; display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
@@ -86,15 +129,15 @@
 
   section { padding: 6rem 3rem; }
   .section-label { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
-  .section-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(2rem, 4vw, 2.8rem); letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 1rem; }
+  .section-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(2rem, 4vw, 2.8rem); letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 1rem; }
   .section-sub { font-size: 1rem; font-weight: 300; color: var(--gray); max-width: 48ch; line-height: 1.7; }
 
   .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; margin-top: 4rem; border: 0.5px solid var(--border); border-radius: 16px; overflow: hidden; }
   .step { background: var(--card-bg); padding: 2.5rem 2rem; transition: background 0.3s; }
   .step:hover { background: rgba(255,255,255,0.055); }
-  .step-num { font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 1.5rem; }
+  .step-num { font-family: 'Space Grotesk', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 1.5rem; }
   .step-icon { width: 44px; height: 44px; background: rgba(200,240,101,0.08); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
-  .step h3 { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 600; margin-bottom: 0.6rem; }
+  .step h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; font-weight: 600; margin-bottom: 0.6rem; }
   .step p { font-size: 0.9rem; color: var(--gray); line-height: 1.65; }
 
   .checks { background: rgba(255,255,255,0.015); border-radius: 20px; border: 0.5px solid var(--border); overflow: hidden; margin-top: 4rem; }
@@ -112,7 +155,7 @@
   .cara-section { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
   .cara-visual { background: rgba(26,122,74,0.08); border: 0.5px solid rgba(26,122,74,0.25); border-radius: 20px; padding: 3rem 2.5rem; text-align: center; position: relative; overflow: hidden; }
   .cara-visual::before { content: ''; position: absolute; top: -40px; left: 50%; transform: translateX(-50%); width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(26,122,74,0.3) 0%, transparent 70%); }
-  .cara-logo-big { font-family: 'Syne', sans-serif; font-size: 3.5rem; font-weight: 800; color: var(--accent); letter-spacing: -0.04em; position: relative; z-index: 1; margin-bottom: 0.5rem; }
+  .cara-logo-big { font-family: 'Space Grotesk', sans-serif; font-size: 3.5rem; font-weight: 700; color: var(--accent); letter-spacing: -0.02em; position: relative; z-index: 1; margin-bottom: 0.5rem; }
   .cara-logo-sub { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); position: relative; z-index: 1; }
   .cara-divider { width: 40px; height: 1px; background: rgba(200,240,101,0.3); margin: 1.5rem auto; position: relative; z-index: 1; }
   .cara-report-lines { position: relative; z-index: 1; }
@@ -146,11 +189,14 @@
   .form-success { display: none; text-align: center; padding: 3rem 2rem; background: rgba(26,122,74,0.08); border: 0.5px solid rgba(26,122,74,0.25); border-radius: 16px; margin-top: 4rem; }
   .form-success.visible { display: block; }
   .success-icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(200,240,101,0.12); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; }
-  .form-success h3 { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .form-success h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
   .form-success p { font-size: 0.95rem; color: var(--gray); }
 
   footer { padding: 2.5rem 3rem; border-top: 0.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-  .footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; color: var(--white); display: flex; align-items: center; gap: 6px; }
+  .footer-logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--white); display: flex; align-items: center; gap: 6px; }
+  .footer-contact { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--white); text-decoration: none; transition: color 0.2s; }
+  .footer-contact:hover { color: var(--accent); }
+  .footer-contact svg { color: var(--accent); flex-shrink: 0; }
 
   .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .fade-up.visible { opacity: 1; transform: translateY(0); }
@@ -165,6 +211,7 @@
     .nav-toggle { display: inline-flex; }
     section { padding: 4rem 1.5rem; }
     .hero { padding: 7rem 1.5rem 4rem; }
+    .hero h1 { font-size: 2.8rem; }
     .cara-section { grid-template-columns: 1fr; }
     .checks-header { grid-template-columns: 1fr; }
     .checks-col + .checks-col { border-left: none; border-top: 0.5px solid var(--border); }
@@ -221,6 +268,130 @@
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>
+  <div class="hero-visual" aria-hidden="true">
+    <svg viewBox="0 0 480 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="topG" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#1d1d1d"/>
+          <stop offset="100%" stop-color="#0e0e0e"/>
+        </linearGradient>
+        <linearGradient id="leftG" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#070707"/>
+          <stop offset="100%" stop-color="#161616"/>
+        </linearGradient>
+        <linearGradient id="rightG" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#1a1a1a"/>
+          <stop offset="100%" stop-color="#0a0a0a"/>
+        </linearGradient>
+        <radialGradient id="ambient" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#c8f065" stop-opacity="0.22"/>
+          <stop offset="55%" stop-color="#1a7a4a" stop-opacity="0.08"/>
+          <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="cellG" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#c8f065" stop-opacity="0.85"/>
+          <stop offset="100%" stop-color="#1a7a4a" stop-opacity="0.55"/>
+        </linearGradient>
+        <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="6"/>
+        </filter>
+        <clipPath id="topClip">
+          <polygon points="240,100 400,200 240,300 80,200"/>
+        </clipPath>
+      </defs>
+
+      <!-- ambient halo -->
+      <ellipse class="halo" cx="240" cy="215" rx="250" ry="190" fill="url(#ambient)"/>
+
+      <!-- ground shadow -->
+      <ellipse cx="240" cy="378" rx="170" ry="14" fill="#000" opacity="0.55"/>
+
+      <!-- left/front face -->
+      <polygon points="80,200 240,300 240,350 80,250" fill="url(#leftG)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <!-- right/back face -->
+      <polygon points="400,200 240,300 240,350 400,250" fill="url(#rightG)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <!-- top face -->
+      <polygon points="240,100 400,200 240,300 80,200" fill="url(#topG)" stroke="rgba(200,240,101,0.45)" stroke-width="1.2"/>
+
+      <!-- cell grid on top face (4 rows × 8 cols) -->
+      <g stroke="rgba(255,255,255,0.07)" stroke-width="0.8">
+        <line x1="200" y1="125" x2="360" y2="225"/>
+        <line x1="160" y1="150" x2="320" y2="250"/>
+        <line x1="120" y1="175" x2="280" y2="275"/>
+        <line x1="260" y1="112.5" x2="100" y2="212.5"/>
+        <line x1="280" y1="125" x2="120" y2="225"/>
+        <line x1="300" y1="137.5" x2="140" y2="237.5"/>
+        <line x1="320" y1="150" x2="160" y2="250"/>
+        <line x1="340" y1="162.5" x2="180" y2="262.5"/>
+        <line x1="360" y1="175" x2="200" y2="275"/>
+        <line x1="380" y1="187.5" x2="220" y2="287.5"/>
+      </g>
+
+      <!-- glowing cells (soft halos behind) -->
+      <g filter="url(#softGlow)" opacity="0.8">
+        <polygon points="320,150 340,162.5 300,187.5 280,175" fill="url(#cellG)"/>
+        <polygon points="240,150 260,162.5 220,187.5 200,175" fill="url(#cellG)"/>
+        <polygon points="280,225 300,237.5 260,262.5 240,250" fill="url(#cellG)"/>
+        <polygon points="260,112.5 280,125 240,150 220,137.5" fill="url(#cellG)"/>
+        <polygon points="300,187.5 320,200 280,225 260,212.5" fill="url(#cellG)"/>
+      </g>
+      <!-- glowing cells (crisp top) -->
+      <polygon class="cell-pulse" points="320,150 340,162.5 300,187.5 280,175" fill="url(#cellG)"/>
+      <polygon class="cell-pulse cell-pulse-2" points="240,150 260,162.5 220,187.5 200,175" fill="url(#cellG)"/>
+      <polygon class="cell-pulse cell-pulse-3" points="280,225 300,237.5 260,262.5 240,250" fill="url(#cellG)"/>
+      <polygon class="cell-pulse cell-pulse-4" points="260,112.5 280,125 240,150 220,137.5" fill="url(#cellG)"/>
+      <polygon class="cell-pulse cell-pulse-5" points="300,187.5 320,200 280,225 260,212.5" fill="url(#cellG)"/>
+
+      <!-- flicker cells (brief electric flashes) -->
+      <polygon class="cell-flicker" points="220,187.5 240,200 200,225 180,212.5" fill="url(#cellG)"/>
+      <polygon class="cell-flicker cell-flicker-2" points="200,125 220,137.5 180,162.5 160,150" fill="url(#cellG)"/>
+      <polygon class="cell-flicker cell-flicker-3" points="300,237.5 320,250 280,275 260,262.5" fill="url(#cellG)"/>
+
+      <!-- diagnostic scan line sweeping across the top face -->
+      <g clip-path="url(#topClip)">
+        <g class="scan">
+          <line x1="240" y1="100" x2="80" y2="200" stroke="#c8f065" stroke-width="3" opacity="0.25" filter="url(#softGlow)"/>
+          <line x1="240" y1="100" x2="80" y2="200" stroke="#c8f065" stroke-width="1.3" opacity="0.85"/>
+        </g>
+      </g>
+
+      <!-- accent edge highlight along back ridges -->
+      <polyline class="ridge" points="80,200 240,100 400,200" stroke="rgba(200,240,101,0.7)" stroke-width="1.2" fill="none"/>
+
+      <!-- energy sparks rising from the pack -->
+      <g>
+        <circle class="spark" cx="280" cy="190" r="1.8" fill="#c8f065"/>
+        <circle class="spark spark-2" cx="210" cy="220" r="1.5" fill="#c8f065"/>
+        <circle class="spark spark-3" cx="320" cy="235" r="1.6" fill="#c8f065"/>
+      </g>
+
+      <!-- terminals -->
+      <g>
+        <!-- + terminal (back-right) -->
+        <ellipse cx="356" cy="172" rx="14" ry="7" fill="#161616" stroke="rgba(200,240,101,0.4)" stroke-width="1"/>
+        <ellipse cx="356" cy="166" rx="14" ry="7" fill="#202020" stroke="rgba(200,240,101,0.6)" stroke-width="1"/>
+        <g class="term-plus">
+          <line x1="350" y1="166" x2="362" y2="166" stroke="#c8f065" stroke-width="1.4"/>
+          <line x1="356" y1="161" x2="356" y2="171" stroke="#c8f065" stroke-width="1.4"/>
+        </g>
+        <!-- − terminal (back-left) -->
+        <ellipse cx="124" cy="172" rx="14" ry="7" fill="#161616" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+        <ellipse cx="124" cy="166" rx="14" ry="7" fill="#202020" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+        <line x1="118" y1="166" x2="130" y2="166" stroke="rgba(255,255,255,0.6)" stroke-width="1.4"/>
+      </g>
+
+      <!-- floating SoH chip -->
+      <g class="chip">
+        <g transform="translate(396, 90)">
+          <line class="leader" x1="-58" y1="40" x2="-12" y2="14" stroke="rgba(200,240,101,0.5)" stroke-width="0.8" stroke-dasharray="3 3"/>
+          <circle cx="-58" cy="40" r="2.5" fill="#c8f065"/>
+          <rect x="-44" y="-16" width="88" height="32" rx="16" fill="rgba(10,10,10,0.92)" stroke="rgba(200,240,101,0.45)" stroke-width="1"/>
+          <text x="0" y="5" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="600" font-size="14" fill="#c8f065" letter-spacing="0.5">SoH 94%</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+
   <div class="hero-badges fade-up delay-4">
     <div class="badge"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg><span data-t="badge_cara">CARA Tanúsított Jelentés</span></div>
     <div class="badge"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span data-t="badge_mobile">Kiszállunk Hozzád</span></div>
@@ -311,7 +482,7 @@
         <div style="margin-top:1.5rem;display:flex;justify-content:space-between;align-items:center;">
           <div>
             <div style="font-size:0.7rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">SoH Score</div>
-            <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:700;color:var(--accent);">94%</div>
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;color:var(--accent);">94%</div>
           </div>
           <div style="text-align:right;">
             <div style="font-size:0.7rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;" data-t="cara_status_label">Állapot</div>
@@ -365,6 +536,10 @@
       <div class="success-icon"><svg width="24" height="24" fill="none" stroke="var(--accent)" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
       <h3 data-t="success_title">Kérés megérkezett!</h3>
       <p data-t="success_desc">Köszönjük a megkeresést! 24 órán belül visszaigazoljuk az időpontot.</p>
+      <button type="button" id="book-another" class="btn-submit" style="margin-top:2rem;">
+        <span data-t="success_again">Új időpontfoglalás</span>
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
     </div>
   </div>
 </section>
@@ -372,6 +547,10 @@
 <footer>
   <div class="footer-logo"><span class="logo-dot"></span>VoltCheck</div>
   <p data-t="footer_tagline">Mobil EV Akkumulátor Diagnosztika · CARA Tanúsított Jelentések</p>
+  <a class="footer-contact" href="mailto:info@voltcheck.hu">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+    <span>info@voltcheck.hu</span>
+  </a>
   <p style="font-size:0.8rem;color:var(--gray);" data-t="footer_copy">© 2025 VoltCheck. Minden jog fenntartva.</p>
 </footer>
 
@@ -426,6 +605,7 @@ const T = {
     err_network:"Network error. Please check your connection and try again.",
     err_generic:"Something went wrong. Please try again.",
     success_title:"Request received!", success_desc:"Thanks for getting in touch. We'll confirm your appointment within 24 hours.",
+    success_again:"Book another appointment",
     footer_tagline:"Mobile EV Battery Diagnostics · CARA Approved Reports",
     footer_copy:"© 2025 VoltCheck. All rights reserved.",
     doc_title:"VoltCheck — EV Battery Diagnostics"
@@ -479,6 +659,7 @@ const T = {
     err_network:"Hálózati hiba. Ellenőrizd a kapcsolatot és próbáld újra.",
     err_generic:"Hiba történt. Kérlek, próbáld újra.",
     success_title:"Kérés megérkezett!", success_desc:"Köszönjük a megkeresést! 24 órán belül visszaigazoljuk az időpontot.",
+    success_again:"Új időpontfoglalás",
     footer_tagline:"Mobil EV Akkumulátor Diagnosztika · CARA Tanúsított Jelentések",
     footer_copy:"© 2025 VoltCheck. Minden jog fenntartva.",
     doc_title:"VoltCheck — EV Akkumulátor Diagnosztika"
@@ -764,6 +945,20 @@ form.addEventListener('submit', async (e) => {
     submitLabel.textContent = originalLabel;
     submitBtn.disabled = false;
   }
+});
+
+document.getElementById('book-another').addEventListener('click', () => {
+  form.reset();
+  fillDatalist(modelsList, []);
+  clearError();
+  form.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+  const submitBtn = form.querySelector('.btn-submit');
+  submitBtn.disabled = false;
+  submitBtn.querySelector('.btn-submit-label').textContent = T[lang].f_submit;
+  document.getElementById('success-msg').classList.remove('visible');
+  form.style.display = '';
+  form.scrollIntoView({behavior:'smooth', block:'start'});
+  document.getElementById('fname').focus();
 });
 
 const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), {threshold:0.1});
