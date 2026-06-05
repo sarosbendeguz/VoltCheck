@@ -140,6 +140,8 @@
   .step h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; font-weight: 600; margin-bottom: 0.6rem; }
   .step p { font-size: 0.9rem; color: var(--gray); line-height: 1.65; }
 
+  .why-cta { display: flex; justify-content: center; margin-top: 3rem; }
+
   .checks { background: rgba(255,255,255,0.015); border-radius: 20px; border: 0.5px solid var(--border); overflow: hidden; margin-top: 4rem; }
   .checks-header { display: grid; grid-template-columns: 1fr 1fr; }
   .checks-col { padding: 2.5rem; border-bottom: 0.5px solid var(--border); }
@@ -152,7 +154,8 @@
   .check-item p { font-size: 0.875rem; color: var(--gray); line-height: 1.5; }
   .check-item strong { display: block; color: var(--white); font-weight: 500; font-size: 0.9rem; }
 
-  .cara-section { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .cara-section { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .cara-section > .fade-up:first-child { position: sticky; top: 100px; }
   .cara-visual { background: rgba(26,122,74,0.08); border: 0.5px solid rgba(26,122,74,0.25); border-radius: 20px; padding: 3rem 2.5rem; text-align: center; position: relative; overflow: hidden; }
   .cara-visual::before { content: ''; position: absolute; top: -40px; left: 50%; transform: translateX(-50%); width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(26,122,74,0.3) 0%, transparent 70%); }
   .cara-logo-big { font-family: 'Space Grotesk', sans-serif; font-size: 3.5rem; font-weight: 700; color: var(--accent); letter-spacing: -0.02em; position: relative; z-index: 1; margin-bottom: 0.5rem; }
@@ -163,6 +166,10 @@
   .cara-line.accent { background: rgba(200,240,101,0.2); width: 60%; }
   .cara-line.med { width: 85%; }
   .cara-line.short { width: 50%; }
+
+  .cara-report { margin: 0; border-radius: 20px; overflow: hidden; border: 0.5px solid var(--border); background: #fff; box-shadow: 0 14px 50px rgba(0,0,0,0.5); }
+  .cara-report img { display: block; width: 100%; height: auto; }
+  .cara-report figcaption { font-size: 0.75rem; color: var(--gray); text-align: center; padding: 0.85rem 1rem; background: var(--black); border-top: 0.5px solid var(--border); }
 
   #contact { background: rgba(255,255,255,0.01); }
   .form-wrapper { max-width: 680px; margin: 4rem auto 0; }
@@ -213,6 +220,7 @@
     .hero { padding: 7rem 1.5rem 4rem; }
     .hero h1 { font-size: 2.8rem; }
     .cara-section { grid-template-columns: 1fr; }
+    .cara-section > .fade-up:first-child { position: static; }
     .checks-header { grid-template-columns: 1fr; }
     .checks-col + .checks-col { border-left: none; border-top: 0.5px solid var(--border); }
     .checks-items { grid-template-columns: 1fr; }
@@ -230,6 +238,7 @@
     <li><a href="#how-it-works" data-t="nav_how">Hogyan működik</a></li>
     <li><a href="#diagnostics" data-t="nav_diag">Diagnosztika</a></li>
     <li><a href="#report" data-t="nav_report">CARA Jelentés</a></li>
+    <li><a href="#why" data-t="nav_why">Kinek hasznos</a></li>
     <li><a href="#contact" data-t="nav_contact">Kapcsolat</a></li>
   </ul>
   <div class="nav-right">
@@ -249,6 +258,7 @@
   <a href="#how-it-works" data-t="nav_how">Hogyan működik</a>
   <a href="#diagnostics" data-t="nav_diag">Diagnosztika</a>
   <a href="#report" data-t="nav_report">CARA Jelentés</a>
+  <a href="#why" data-t="nav_why">Kinek hasznos</a>
   <a href="#contact" data-t="nav_contact">Kapcsolat</a>
 </div>
 
@@ -470,31 +480,36 @@
         <div style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:var(--white);"><svg width="16" height="16" fill="none" stroke="var(--accent)" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span data-t="cara_li4">Ellenőrizhető tanúsítványszám</span></div>
       </div>
     </div>
-    <div class="cara-visual fade-up delay-2">
-      <div class="cara-logo-big">CARA</div>
-      <div class="cara-logo-sub">Battery Health Certificate</div>
-      <div class="cara-divider"></div>
-      <div class="cara-report-lines">
-        <div class="cara-line accent"></div>
-        <div class="cara-line med"></div>
-        <div class="cara-line"></div>
-        <div class="cara-line short"></div>
-        <div style="margin-top:1.5rem;display:flex;justify-content:space-between;align-items:center;">
-          <div>
-            <div style="font-size:0.7rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">SoH Score</div>
-            <div style="font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;color:var(--accent);">94%</div>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:0.7rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;" data-t="cara_status_label">Állapot</div>
-            <div style="font-size:0.85rem;font-weight:500;color:#2db368;background:rgba(45,179,104,0.1);padding:4px 12px;border-radius:100px;" data-t="cara_status_val">Kiváló</div>
-          </div>
-        </div>
-        <div style="margin-top:1rem;padding-top:1rem;border-top:0.5px solid var(--border);font-size:0.75rem;color:var(--gray);display:flex;justify-content:space-between;">
-          <span>Cert #: VC-2024-08471</span>
-          <span style="color:var(--accent);">✓ Verified</span>
-        </div>
-      </div>
+    <figure class="cara-report fade-up delay-2">
+      <img src="assets/sample-report.png" alt="VoltCheck akkumulátor-állapotjelentés mintaoldal (példa adatokkal)" loading="lazy" />
+      <figcaption data-t="cara_sample_cap">Minta jelentés — szemléltető adatokkal</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="why">
+  <div class="section-label fade-up" data-t="why_label">Kinek hasznos</div>
+  <h2 class="section-title fade-up delay-1" data-t="why_title">Miért hasznos ez neked?</h2>
+  <p class="section-sub fade-up delay-2" data-t="why_sub">Akár eladnád, akár megvennéd, akár csak ismerned szeretnéd az autód — egy hiteles akkumulátor-jelentés a te oldaladra állítja a tényeket.</p>
+  <div class="steps-grid">
+    <div class="step fade-up">
+      <div class="step-icon"><svg width="22" height="22" fill="none" stroke="var(--accent)" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><circle cx="7" cy="7" r="1.5"/></svg></div>
+      <h3 data-t="why1_title">Eladod az autód?</h3><p data-t="why1_desc">Egy CARA-tanúsított jelentés feketén-fehéren igazolja az akkumulátor állapotát — növeli a vevők bizalmát, lerövidíti az alkudozást és magasabb eladási árat érhetsz el.</p>
     </div>
+    <div class="step fade-up delay-1">
+      <div class="step-icon"><svg width="22" height="22" fill="none" stroke="var(--accent)" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></div>
+      <h3 data-t="why2_title">Használt EV-t vennél?</h3><p data-t="why2_desc">Vásárlás előtt derítsd ki az akkumulátor valódi állapotát. Kerüld el a rejtett degradációt és a sok százezres utólagos meglepetéseket — biztos lehetsz benne, hogy jó vételt csinálsz.</p>
+    </div>
+    <div class="step fade-up delay-2">
+      <div class="step-icon"><svg width="22" height="22" fill="none" stroke="var(--accent)" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2M6 10v4M10 10v4"/></svg></div>
+      <h3 data-t="why3_title">Már van elektromos autód?</h3><p data-t="why3_desc">Ismerd meg az akkumulátorod pontos egészségi állapotát (SoH), valós hatótávját és degradációját — hogy nyugodtan tervezhesd a következő éveket vagy időben lépj, ha kell.</p>
+    </div>
+  </div>
+  <div class="why-cta fade-up delay-2">
+    <a href="#contact" class="btn-primary">
+      <span data-t="why_cta">Foglalj időpontot</span>
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
   </div>
 </section>
 
@@ -557,7 +572,7 @@
 <script>
 const T = {
   en: {
-    nav_how:"How it works", nav_diag:"Diagnostics", nav_report:"CARA Report", nav_contact:"Contact", nav_cta:"Book a Diagnostic",
+    nav_how:"How it works", nav_diag:"Diagnostics", nav_report:"CARA Report", nav_why:"Who it's for", nav_contact:"Contact", nav_cta:"Book a Diagnostic",
     hero_tag:"EV & Hybrid Battery Specialists",
     hero_h1:"Know your <em>battery's</em> true health.",
     hero_sub:"Mobile battery diagnostics for electric and hybrid vehicles — we come to you, assess your battery, and deliver a certified CARA-approved health report.",
@@ -587,6 +602,13 @@ const T = {
     cara_li1:"Issued on same day as diagnostic", cara_li2:"Accepted by dealers, lenders & insurers",
     cara_li3:"Digital PDF + physical copy available", cara_li4:"Verifiable certification number",
     cara_status_label:"Status", cara_status_val:"Excellent",
+    cara_sample_cap:"Sample report — with illustrative data",
+    why_label:"Who it's for", why_title:"Why this is useful for you",
+    why_sub:"Whether you're selling, buying, or simply driving your EV — an independent battery report puts the facts on your side.",
+    why1_title:"Selling your car?", why1_desc:"A CARA-certified report proves your battery's condition in black and white — it builds buyer trust, cuts down haggling, and helps you command a higher price.",
+    why2_title:"Buying a used EV?", why2_desc:"Find out the battery's true health before you commit. Avoid hidden degradation and costly surprises down the road — and know you're making a smart purchase.",
+    why3_title:"Already own an EV?", why3_desc:"Know your battery's exact State of Health (SoH), real-world range, and degradation — so you can plan ahead with confidence, or act in time if needed.",
+    why_cta:"Book an appointment",
     form_label:"Get in touch", form_title:"Book your diagnostic",
     form_sub:"Tell us about your vehicle and we'll be in touch to arrange a convenient time.",
     f_fname:"First name", ph_fname:"Alex", f_lname:"Last name", ph_lname:"Smith",
@@ -611,7 +633,7 @@ const T = {
     doc_title:"VoltCheck — EV Battery Diagnostics"
   },
   hu: {
-    nav_how:"Hogyan működik", nav_diag:"Diagnosztika", nav_report:"CARA Jelentés", nav_contact:"Kapcsolat", nav_cta:"Időpontfoglalás",
+    nav_how:"Hogyan működik", nav_diag:"Diagnosztika", nav_report:"CARA Jelentés", nav_why:"Kinek hasznos", nav_contact:"Kapcsolat", nav_cta:"Időpontfoglalás",
     hero_tag:"EV és Hibrid Akkumulátor Specialisták",
     hero_h1:"Tudd meg, mi az <em>akkumulátorod</em> valódi állapota.",
     hero_sub:"Mobil akkumulátor-diagnosztika elektromos és hibrid járművekhez — kiszállunk hozzád, elvégezzük a vizsgálatot, és átadunk egy CARA-tanúsított akkumulátor-egészségügyi jelentést.",
@@ -641,6 +663,13 @@ const T = {
     cara_li1:"A diagnosztikával azonos napon kerül kiállításra", cara_li2:"Kereskedők, hitelezők és biztosítók elfogadják",
     cara_li3:"Digitális PDF és nyomtatott példány elérhető", cara_li4:"Ellenőrizhető tanúsítványszám",
     cara_status_label:"Állapot", cara_status_val:"Kiváló",
+    cara_sample_cap:"Minta jelentés — szemléltető adatokkal",
+    why_label:"Kinek hasznos", why_title:"Miért hasznos ez neked?",
+    why_sub:"Akár eladnád, akár megvennéd, akár csak ismerned szeretnéd az autód — egy független akkumulátor-jelentés a te oldaladra állítja a tényeket.",
+    why1_title:"Eladod az autód?", why1_desc:"Egy CARA-tanúsított jelentés feketén-fehéren igazolja az akkumulátor állapotát — növeli a vevők bizalmát, lerövidíti az alkudozást és magasabb eladási árat érhetsz el.",
+    why2_title:"Használt EV-t vennél?", why2_desc:"Vásárlás előtt derítsd ki az akkumulátor valódi állapotát. Kerüld el a rejtett degradációt és a sok százezres utólagos meglepetéseket — biztos lehetsz benne, hogy jó vételt csinálsz.",
+    why3_title:"Már van elektromos autód?", why3_desc:"Ismerd meg az akkumulátorod pontos egészségi állapotát (SoH), valós hatótávját és degradációját — hogy nyugodtan tervezhesd a következő éveket vagy időben lépj, ha kell.",
+    why_cta:"Foglalj időpontot",
     form_label:"Kapcsolatfelvétel", form_title:"Foglalj diagnosztikát",
     form_sub:"Mesélj a járművedről és felvesszük veled a kapcsolatot az időpont egyeztetéséhez.",
     f_fname:"Keresztnév", ph_fname:"Péter", f_lname:"Vezetéknév", ph_lname:"Kovács",
