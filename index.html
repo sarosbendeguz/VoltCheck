@@ -172,6 +172,15 @@
   .cara-report img { display: block; width: 100%; height: auto; }
   .cara-report figcaption { font-size: 0.75rem; color: var(--gray); text-align: center; padding: 0.85rem 1rem; background: var(--black); border-top: 0.5px solid var(--border); }
 
+  .report-legend { margin-top: 5rem; }
+  .report-legend-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -0.02em; text-align: center; margin-bottom: 2.5rem; }
+  .legend-grid { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; border: 0.5px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .legend-item { display: grid; grid-template-columns: 30px 1fr; gap: 14px; padding: 1.7rem 1.9rem; background: var(--card-bg); transition: background 0.2s; }
+  .legend-item:hover { background: rgba(255,255,255,0.055); }
+  .legend-num { width: 28px; height: 28px; border-radius: 50%; background: rgba(200,240,101,0.1); color: var(--accent); font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; }
+  .legend-item h4 { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; margin-bottom: 0.35rem; }
+  .legend-item p { font-size: 0.875rem; color: var(--gray); line-height: 1.6; }
+
   #contact { background: rgba(255,255,255,0.01); }
   .form-wrapper { max-width: 680px; margin: 4rem auto 0; }
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
@@ -440,7 +449,7 @@
 <section id="report">
   <div class="cara-section">
     <div class="fade-up">
-      <div class="section-label" data-t="cara_label">Tanúsítás</div>
+      <div class="section-label" data-t="cara_label">Certifikáció</div>
       <h2 class="section-title" data-t="cara_title">CARA jóváhagyott akkumulátor-egészségügyi jelentés</h2>
       <p style="font-size:1rem;color:var(--gray);line-height:1.75;margin-bottom:1.5rem;" data-t="cara_p1">Minden diagnosztika hivatalos CARA-jóváhagyott akkumulátor-egészségügyi jelentéssel zárul — ez az EV akkumulátor-tanúsítás iparági elismert szabványa.</p>
       <p style="font-size:1rem;color:var(--gray);line-height:1.75;margin-bottom:2rem;" data-t="cara_p2">Akár veszel, akár adsz el járművet, akár csak nyomon követed annak állapotát — a jelentés dokumentált bizonyítékot ad az akkumulátor állapotáról.</p>
@@ -455,6 +464,20 @@
       <img src="assets/sample-report.png" alt="VoltCheck akkumulátor-állapotjelentés mintaoldal (példa adatokkal)" loading="lazy" />
       <figcaption data-t="cara_sample_cap">Minta jelentés — szemléltető adatokkal</figcaption>
     </figure>
+  </div>
+
+  <div class="report-legend">
+    <h3 class="report-legend-title fade-up" data-t="legend_title">Mit tartalmaz a jelentés?</h3>
+    <ol class="legend-grid fade-up delay-1">
+      <li class="legend-item"><span class="legend-num">1</span><div><h4 data-t="leg1_t">Iparági standard</h4><p data-t="leg1_d">Diagnosztikánk során a CARA által jóváhagyott, hitelesített Autel műszereket használunk — a független, iparági standardnak megfelelő, objektív mérés garanciája.</p></div></li>
+      <li class="legend-item"><span class="legend-num">2</span><div><h4 data-t="leg2_t">Jármű- és vizsgálati adatok</h4><p data-t="leg2_d">A jármű és az akkumulátor egyedi azonosítói, típusadatai és a vizsgálat pontos időpontja — minden, ami a jelentést egyértelműen a járműhöz köti.</p></div></li>
+      <li class="legend-item"><span class="legend-num">3</span><div><h4 data-t="leg3_t">Akkumulátor egészségi állapot (SOH)</h4><p data-t="leg3_d">Részletes akkumulátor-analitika: objektív adatok a cellák egészségi állapotáról, a hőmérséklet-eloszlásról és a feszültségszintek kiegyensúlyozottságáról a teljes csomagban.</p></div></li>
+      <li class="legend-item"><span class="legend-num">4</span><div><h4 data-t="leg4_t">Becsült hatótáv és energia</h4><p data-t="leg4_d">A jelenlegi kapacitás a gyári értékhez viszonyítva, kWh-ban és becsült WLTP-hatótávban (km) kifejezve.</p></div></li>
+      <li class="legend-item"><span class="legend-num">5</span><div><h4 data-t="leg5_t">Hibakód-ellenőrzés</h4><p data-t="leg5_d">Az akkumulátor-kezelő rendszer (BMS) által tárolt hibakódok (DTC) megjelenítése és ellenőrzése.</p></div></li>
+      <li class="legend-item"><span class="legend-num">6</span><div><h4 data-t="leg6_t">Modul- és cellafeszültség</h4><p data-t="leg6_d">Részletes elemzés a modul- és cellafeszültségekről, a gyártó által megadott értékekkel összehasonlítva.</p></div></li>
+      <li class="legend-item"><span class="legend-num">7</span><div><h4 data-t="leg7_t">Cellánkénti részletes táblázat</h4><p data-t="leg7_d">Minden modul és minden egyes cella feszültsége egy helyen, színkódolt „hőtérképként”, amely azonnal kiemeli a leggyengébb cellákat.</p></div></li>
+      <li class="legend-item"><span class="legend-num">8</span><div><h4 data-t="leg8_t">Hőmérséklet-konzisztencia</h4><p data-t="leg8_d">Modulonkénti hőmérsékletek a min./max./átlag értékekkel, hogy látható legyen, mennyire egyenletes a csomag hűtése.</p></div></li>
+    </ol>
   </div>
 </section>
 
@@ -574,6 +597,15 @@ const T = {
     cara_li3:"Digital PDF and printed copy", cara_li4:"Only certified measurement instruments used",
     cara_status_label:"Status", cara_status_val:"Excellent",
     cara_sample_cap:"Sample report — with illustrative data",
+    legend_title:"What's in the report?",
+    leg1_t:"Industry standard", leg1_d:"Our diagnostics use CARA-approved, certified Autel instruments — your guarantee of an independent, objective measurement that meets industry standards.",
+    leg2_t:"Vehicle & test data", leg2_d:"The vehicle's and battery's unique identifiers, model data, and the exact test date — everything that ties the report unambiguously to the vehicle.",
+    leg3_t:"Battery State of Health (SOH)", leg3_d:"Detailed battery analytics: objective data on cell health, temperature distribution, and how balanced the voltage levels are across the whole pack.",
+    leg4_t:"Estimated range & energy", leg4_d:"Current capacity relative to the factory value, expressed in kWh and estimated WLTP range (km).",
+    leg5_t:"Fault-code check", leg5_d:"Display and review of any fault codes (DTCs) stored by the Battery Management System (BMS).",
+    leg6_t:"Module & cell voltage", leg6_d:"Detailed analysis of module and cell voltages, compared against the manufacturer's specified values.",
+    leg7_t:"Per-cell detailed table", leg7_d:"Every module and every individual cell voltage in one place, as a colour-coded “heat map” that instantly highlights the weakest cells.",
+    leg8_t:"Temperature consistency", leg8_d:"Per-module temperatures with min/max/average values, so you can see how evenly the pack is cooled.",
     why_label:"Who it's for", why_title:"Why this is useful for you",
     why_sub:"Whether you're selling, buying, or simply driving your EV — an independent battery report puts the facts on your side.",
     why1_title:"If you're selling your car", why1_desc:"Sell faster and for a higher price! On the used EV market, buyers' biggest fear is the unknown condition of the battery. With an independent, professional battery diagnostic certificate, you make the condition of the car's most valuable component transparent and quantifiable. This trust-building document not only shortens the decision process, but thanks to the credible condition assessment, also helps you achieve an above-market sale price.",
@@ -628,13 +660,22 @@ const T = {
     chk6_title:"Belső ellenállás", chk6_desc:"Cellaimpedancia és degradációs mutatók",
     chk7_title:"Töltési ciklusok száma", chk7_desc:"Összes töltési ciklus és degradációs ráta",
     chk8_title:"Hatótáv becslés", chk8_desc:"Reális felhasználható hatótáv a jelenlegi állapot alapján",
-    cara_label:"Tanúsítás", cara_title:"CARA jóváhagyott akkumulátor-egészségügyi jelentés",
+    cara_label:"Certifikáció", cara_title:"CARA jóváhagyott akkumulátor-egészségügyi jelentés",
     cara_p1:"Minden diagnosztika hivatalos CARA-jóváhagyott akkumulátor-egészségügyi jelentéssel zárul — ez az EV akkumulátor-tanúsítás iparági elismert szabványa.",
     cara_p2:"Akár veszel, akár adsz el járművet, akár csak nyomon követed annak állapotát — a jelentés dokumentált bizonyítékot ad az akkumulátor állapotáról.",
     cara_li1:"A diagnosztikával azonos napon kerül kiállításra", cara_li2:"Független vélemény és kiértékelés a BMS alapján",
     cara_li3:"Digitális PDF és nyomtatott példány", cara_li4:"Kizárólag hitelesített mérőműszerek használata",
     cara_status_label:"Állapot", cara_status_val:"Kiváló",
     cara_sample_cap:"Minta jelentés — szemléltető adatokkal",
+    legend_title:"Mit tartalmaz a jelentés?",
+    leg1_t:"Iparági standard", leg1_d:"Diagnosztikánk során a CARA által jóváhagyott, hitelesített Autel műszereket használunk — a független, iparági standardnak megfelelő, objektív mérés garanciája.",
+    leg2_t:"Jármű- és vizsgálati adatok", leg2_d:"A jármű és az akkumulátor egyedi azonosítói, típusadatai és a vizsgálat pontos időpontja — minden, ami a jelentést egyértelműen a járműhöz köti.",
+    leg3_t:"Akkumulátor egészségi állapot (SOH)", leg3_d:"Részletes akkumulátor-analitika: objektív adatok a cellák egészségi állapotáról, a hőmérséklet-eloszlásról és a feszültségszintek kiegyensúlyozottságáról a teljes csomagban.",
+    leg4_t:"Becsült hatótáv és energia", leg4_d:"A jelenlegi kapacitás a gyári értékhez viszonyítva, kWh-ban és becsült WLTP-hatótávban (km) kifejezve.",
+    leg5_t:"Hibakód-ellenőrzés", leg5_d:"Az akkumulátor-kezelő rendszer (BMS) által tárolt hibakódok (DTC) megjelenítése és ellenőrzése.",
+    leg6_t:"Modul- és cellafeszültség", leg6_d:"Részletes elemzés a modul- és cellafeszültségekről, a gyártó által megadott értékekkel összehasonlítva.",
+    leg7_t:"Cellánkénti részletes táblázat", leg7_d:"Minden modul és minden egyes cella feszültsége egy helyen, színkódolt „hőtérképként”, amely azonnal kiemeli a leggyengébb cellákat.",
+    leg8_t:"Hőmérséklet-konzisztencia", leg8_d:"Modulonkénti hőmérsékletek a min./max./átlag értékekkel, hogy látható legyen, mennyire egyenletes a csomag hűtése.",
     why_label:"Kinek hasznos", why_title:"Miért hasznos ez neked?",
     why_sub:"Akár eladnád, akár megvennéd, akár csak ismerned szeretnéd az autód — egy független akkumulátor-jelentés a te oldaladra állítja a tényeket.",
     why1_title:"Ha eladnád az autódat", why1_desc:"Értékesíts gyorsabban és magasabb áron! A használt elektromos autók piacán a vevők legnagyobb félelme az akkumulátor ismeretlen állapota. Egy független, professzionális akkumulátor-diagnosztikai tanúsítvány birtokában átláthatóvá és számszerűsíthetővé teszed az autó legértékesebb alkatrészének állapotát. Ezzel a bizalomépítő dokumentummal nemcsak a döntés folyamatát rövidítheted le, de a hiteles állapotfelmérésnek köszönhetően könnyebben érhetsz el piaci ár feletti eladási értéket is.",
