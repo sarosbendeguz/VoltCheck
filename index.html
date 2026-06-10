@@ -172,14 +172,51 @@
   .cara-report img { display: block; width: 100%; height: auto; }
   .cara-report figcaption { font-size: 0.75rem; color: var(--gray); text-align: center; padding: 0.85rem 1rem; background: var(--black); border-top: 0.5px solid var(--border); }
 
-  .report-legend { margin-top: 5rem; }
-  .report-legend-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -0.02em; text-align: center; margin-bottom: 2.5rem; }
-  .legend-grid { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; border: 0.5px solid var(--border); border-radius: 16px; overflow: hidden; }
-  .legend-item { display: grid; grid-template-columns: 30px 1fr; gap: 14px; padding: 1.7rem 1.9rem; background: var(--card-bg); transition: background 0.2s; }
-  .legend-item:hover { background: rgba(255,255,255,0.055); }
-  .legend-num { width: 28px; height: 28px; border-radius: 50%; background: rgba(200,240,101,0.1); color: var(--accent); font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; }
-  .legend-item h4 { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; margin-bottom: 0.35rem; }
+  .report-intro { max-width: 720px; }
+  .report-intro .section-title { margin-bottom: 1rem; }
+
+  /* image (with pins) and the numbered explanation side by side */
+  .report-showcase { display: grid; grid-template-columns: minmax(0, 680px) 1fr; gap: 3.5rem; margin-top: 4rem; align-items: start; }
+  .report-showcase .cara-report { position: sticky; top: 100px; align-self: start; }
+
+  .report-legend-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(1.4rem, 2.6vw, 1.85rem); letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+  .legend-grid { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+  .legend-item { display: grid; grid-template-columns: 30px 1fr; gap: 14px; padding: 1.05rem 1.1rem; border-radius: 12px; transition: background 0.2s; scroll-margin-top: 90px; }
+  .legend-item:hover { background: rgba(255,255,255,0.04); }
+  .legend-num { width: 28px; height: 28px; border-radius: 50%; background: rgba(200,240,101,0.1); color: var(--accent); font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; transition: background 0.2s, color 0.2s; }
+  .legend-item h4 { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; margin-bottom: 0.3rem; }
   .legend-item p { font-size: 0.875rem; color: var(--gray); line-height: 1.6; }
+  .legend-item.legend-active { background: rgba(200,240,101,0.06); }
+  .legend-item.legend-active .legend-num { background: var(--accent); color: var(--black); }
+
+  /* Numbered pins overlaid on the sample report image, tied to the legend below */
+  .cara-report-media { position: relative; display: block; line-height: 0; }
+  .report-pin {
+    position: absolute; transform: translate(-50%, -50%);
+    width: 26px; height: 26px; border-radius: 50%; border: none;
+    background: var(--black); color: var(--accent);
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.8rem; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 0 3px rgba(200,240,101,0.35), 0 2px 6px rgba(0,0,0,0.45);
+    cursor: pointer; z-index: 2;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .report-pin:hover, .report-pin:focus-visible, .report-pin.active {
+    transform: translate(-50%, -50%) scale(1.18);
+    box-shadow: 0 0 0 4px rgba(200,240,101,0.6), 0 2px 12px rgba(0,0,0,0.55);
+    outline: none;
+  }
+  @media (prefers-reduced-motion: reduce) { .report-pin { transition: none; } }
+
+  /* Tap popover for pins (used on mobile) */
+  .report-popover { position: absolute; z-index: 5; width: min(260px, 78%); line-height: 1.5; background: rgba(16,16,16,0.98); border: 0.5px solid rgba(200,240,101,0.5); border-radius: 14px; padding: 0.85rem 1rem 0.95rem; box-shadow: 0 12px 34px rgba(0,0,0,0.6); opacity: 0; pointer-events: none; transition: opacity 0.15s ease; }
+  .report-popover.open { opacity: 1; pointer-events: auto; }
+  .report-popover__num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: var(--black); font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.75rem; margin-bottom: 0.5rem; }
+  .report-popover__title { font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; font-weight: 600; color: var(--white); margin-bottom: 0.3rem; line-height: 1.3; padding-right: 1.5rem; }
+  .report-popover__desc { font-size: 0.82rem; color: var(--gray); line-height: 1.55; }
+  .report-popover__close { position: absolute; top: 8px; right: 8px; width: 26px; height: 26px; border: none; background: rgba(255,255,255,0.06); border-radius: 50%; color: var(--white); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; }
+  .report-popover__close:hover { background: rgba(255,255,255,0.12); }
+  @media (prefers-reduced-motion: reduce) { .report-popover { transition: none; } }
 
   #contact { background: rgba(255,255,255,0.01); }
   .form-wrapper { max-width: 680px; margin: 4rem auto 0; }
@@ -194,6 +231,15 @@
   select { cursor: pointer; }
   select option { background: #1a1a1a; color: var(--white); }
   textarea { resize: vertical; min-height: 120px; }
+
+  /* Custom make/model dropdown (replaces native <datalist>): opens downward, input-width, capped height */
+  .combo { position: relative; }
+  .combo-list { position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 50; margin: 0; padding: 4px; list-style: none; background: #161616; border: 0.5px solid var(--border); border-radius: 10px; box-shadow: 0 14px 36px rgba(0,0,0,0.55); max-height: min(280px, 42vh); overflow-y: auto; overscroll-behavior: contain; }
+  .combo-list[hidden] { display: none; }
+  .combo-option { padding: 0.6rem 0.8rem; border-radius: 7px; font-size: 0.95rem; color: var(--white); cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .combo-option:hover, .combo-option.active { background: rgba(200,240,101,0.13); }
+  .combo-list::-webkit-scrollbar { width: 10px; }
+  .combo-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.14); border-radius: 8px; border: 3px solid #161616; }
   .form-error { display: none; margin-bottom: 1rem; padding: 0.9rem 1rem; background: rgba(220,70,70,0.08); border: 0.5px solid var(--error); border-radius: 10px; font-size: 0.875rem; color: #f5b5b5; }
   .form-error.visible { display: block; }
   .form-submit { margin-top: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
@@ -225,12 +271,18 @@
   @media (max-width: 768px) {
     nav { padding: 1rem 1.25rem; }
     .nav-links { display: none; }
+    .nav-cta { display: none; }
     .nav-toggle { display: inline-flex; }
+    .mobile-menu a.mobile-menu-cta { margin-top: 1.5rem; padding: 0.95rem 1rem; border-bottom: none; border-radius: 100px; background: var(--accent); color: var(--black); text-align: center; font-size: 1.05rem; }
     section { padding: 4rem 1.5rem; }
     .hero { padding: 7rem 1.5rem 4rem; }
     .hero h1 { font-size: 2.8rem; }
     .cara-section { grid-template-columns: 1fr; }
     .cara-section > .fade-up:first-child { position: static; }
+    .report-showcase { grid-template-columns: 1fr; gap: 2rem; }
+    .report-showcase .cara-report { position: static; }
+    /* enlarge the tap target beyond the visible circle (~46px) for easier tapping */
+    .report-pin::before { content: ''; position: absolute; inset: -10px; border-radius: 50%; }
     .checks-header { grid-template-columns: 1fr; }
     .checks-col + .checks-col { border-left: none; border-top: 0.5px solid var(--border); }
     .checks-items { grid-template-columns: 1fr; }
@@ -268,6 +320,7 @@
   <a href="#report" data-t="nav_report">Certifikáció</a>
   <a href="#why" data-t="nav_why">Kinek hasznos</a>
   <a href="#contact" data-t="nav_contact">Kapcsolat</a>
+  <a href="#contact" class="mobile-menu-cta" data-t="nav_cta">Időpontfoglalás</a>
 </div>
 
 <section class="hero">
@@ -447,37 +500,56 @@
 </section>
 
 <section id="report">
-  <div class="cara-section">
-    <div class="fade-up">
-      <div class="section-label" data-t="cara_label">Certifikáció</div>
-      <h2 class="section-title" data-t="cara_title">CARA jóváhagyott akkumulátor-egészségügyi jelentés</h2>
-      <p style="font-size:1rem;color:var(--gray);line-height:1.75;margin-bottom:1.5rem;" data-t="cara_p1">Minden diagnosztika hivatalos CARA-jóváhagyott akkumulátor-egészségügyi jelentéssel zárul — ez az EV akkumulátor-tanúsítás iparági elismert szabványa.</p>
-      <p style="font-size:1rem;color:var(--gray);line-height:1.75;margin-bottom:2rem;" data-t="cara_p2">Akár veszel, akár adsz el járművet, akár csak nyomon követed annak állapotát — a jelentés dokumentált bizonyítékot ad az akkumulátor állapotáról.</p>
-      <div style="display:flex;flex-direction:column;gap:0.75rem;">
-        <div style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:var(--white);"><svg width="16" height="16" fill="none" stroke="var(--accent)" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span data-t="cara_li1">A diagnosztikával azonos napon kerül kiállításra</span></div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:var(--white);"><svg width="16" height="16" fill="none" stroke="var(--accent)" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span data-t="cara_li2">Független vélemény és kiértékelés a BMS alapján</span></div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:var(--white);"><svg width="16" height="16" fill="none" stroke="var(--accent)" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span data-t="cara_li3">Digitális PDF és nyomtatott példány</span></div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:var(--white);"><svg width="16" height="16" fill="none" stroke="var(--accent)" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span data-t="cara_li4">Kizárólag hitelesített mérőműszerek használata</span></div>
-      </div>
+  <div class="report-intro fade-up">
+    <div class="section-label" data-t="cara_label">Certifikáció</div>
+    <h2 class="section-title" data-t="cara_title">CARA jóváhagyott akkumulátor-egészségügyi jelentés</h2>
+    <p style="font-size:1rem;color:var(--gray);line-height:1.75;margin-bottom:1.5rem;" data-t="cara_p1">Minden diagnosztika hivatalos CARA-jóváhagyott akkumulátor-egészségügyi jelentéssel zárul — ez az EV akkumulátor-tanúsítás iparági elismert szabványa.</p>
+    <p style="font-size:1rem;color:var(--gray);line-height:1.75;margin-bottom:1.5rem;" data-t="cara_p2">Akár veszel, akár adsz el járművet, akár csak nyomon követed annak állapotát — a jelentés dokumentált bizonyítékot ad az akkumulátor állapotáról.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:0.85rem 2rem;">
+      <div style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:var(--white);"><svg width="16" height="16" fill="none" stroke="var(--accent)" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span data-t="cara_li1">A diagnosztikával azonos napon kerül kiállításra</span></div>
+      <div style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:var(--white);"><svg width="16" height="16" fill="none" stroke="var(--accent)" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span data-t="cara_li2">Független vélemény és kiértékelés a BMS alapján</span></div>
+      <div style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:var(--white);"><svg width="16" height="16" fill="none" stroke="var(--accent)" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span data-t="cara_li3">Digitális PDF és nyomtatott példány</span></div>
+      <div style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:var(--white);"><svg width="16" height="16" fill="none" stroke="var(--accent)" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span data-t="cara_li4">Kizárólag hitelesített mérőműszerek használata</span></div>
     </div>
-    <figure class="cara-report fade-up delay-2">
-      <img src="assets/sample-report.png" alt="VoltCheck akkumulátor-állapotjelentés mintaoldal (példa adatokkal)" loading="lazy" />
-      <figcaption data-t="cara_sample_cap">Minta jelentés — szemléltető adatokkal</figcaption>
-    </figure>
   </div>
 
-  <div class="report-legend">
-    <h3 class="report-legend-title fade-up" data-t="legend_title">Mit tartalmaz a jelentés?</h3>
-    <ol class="legend-grid fade-up delay-1">
-      <li class="legend-item"><span class="legend-num">1</span><div><h4 data-t="leg1_t">Iparági standard</h4><p data-t="leg1_d">Diagnosztikánk során a CARA által jóváhagyott, hitelesített Autel műszereket használunk — a független, iparági standardnak megfelelő, objektív mérés garanciája.</p></div></li>
-      <li class="legend-item"><span class="legend-num">2</span><div><h4 data-t="leg2_t">Jármű- és vizsgálati adatok</h4><p data-t="leg2_d">A jármű és az akkumulátor egyedi azonosítói, típusadatai és a vizsgálat pontos időpontja — minden, ami a jelentést egyértelműen a járműhöz köti.</p></div></li>
-      <li class="legend-item"><span class="legend-num">3</span><div><h4 data-t="leg3_t">Akkumulátor egészségi állapot (SOH)</h4><p data-t="leg3_d">Részletes akkumulátor-analitika: objektív adatok a cellák egészségi állapotáról, a hőmérséklet-eloszlásról és a feszültségszintek kiegyensúlyozottságáról a teljes csomagban.</p></div></li>
-      <li class="legend-item"><span class="legend-num">4</span><div><h4 data-t="leg4_t">Becsült hatótáv és energia</h4><p data-t="leg4_d">A jelenlegi kapacitás a gyári értékhez viszonyítva, kWh-ban és becsült WLTP-hatótávban (km) kifejezve.</p></div></li>
-      <li class="legend-item"><span class="legend-num">5</span><div><h4 data-t="leg5_t">Hibakód-ellenőrzés</h4><p data-t="leg5_d">Az akkumulátor-kezelő rendszer (BMS) által tárolt hibakódok (DTC) megjelenítése és ellenőrzése.</p></div></li>
-      <li class="legend-item"><span class="legend-num">6</span><div><h4 data-t="leg6_t">Modul- és cellafeszültség</h4><p data-t="leg6_d">Részletes elemzés a modul- és cellafeszültségekről, a gyártó által megadott értékekkel összehasonlítva.</p></div></li>
-      <li class="legend-item"><span class="legend-num">7</span><div><h4 data-t="leg7_t">Cellánkénti részletes táblázat</h4><p data-t="leg7_d">Minden modul és minden egyes cella feszültsége egy helyen, színkódolt „hőtérképként”, amely azonnal kiemeli a leggyengébb cellákat.</p></div></li>
-      <li class="legend-item"><span class="legend-num">8</span><div><h4 data-t="leg8_t">Hőmérséklet-konzisztencia</h4><p data-t="leg8_d">Modulonkénti hőmérsékletek a min./max./átlag értékekkel, hogy látható legyen, mennyire egyenletes a csomag hűtése.</p></div></li>
+  <!-- image (with numbered pins) beside the matching numbered explanation.
+       Pin coords are % of the sample-report.png box — recheck if that image is regenerated. -->
+  <div class="report-showcase">
+    <figure class="cara-report fade-up">
+      <div class="cara-report-media">
+        <img src="assets/sample-report.png" alt="VoltCheck akkumulátor-állapotjelentés mintaoldal (példa adatokkal)" loading="lazy" />
+        <button type="button" class="report-pin" data-pin="1" style="left:80%; top:6%;" aria-label="1">1</button>
+        <button type="button" class="report-pin" data-pin="2" style="left:24%; top:17%;" aria-label="2">2</button>
+        <button type="button" class="report-pin" data-pin="3" style="left:20%; top:27%;" aria-label="3">3</button>
+        <button type="button" class="report-pin" data-pin="4" style="left:13%; top:37%;" aria-label="4">4</button>
+        <button type="button" class="report-pin" data-pin="5" style="left:16%; top:47%;" aria-label="5">5</button>
+        <button type="button" class="report-pin" data-pin="6" style="left:30%; top:53%;" aria-label="6">6</button>
+        <button type="button" class="report-pin" data-pin="7" style="left:50%; top:64%;" aria-label="7">7</button>
+        <button type="button" class="report-pin" data-pin="8" style="left:45%; top:82%;" aria-label="8">8</button>
+        <div class="report-popover" role="dialog" aria-hidden="true">
+          <button type="button" class="report-popover__close" aria-label="Bezárás"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+          <span class="report-popover__num"></span>
+          <div class="report-popover__title"></div>
+          <div class="report-popover__desc"></div>
+        </div>
+      </div>
+      <figcaption data-t="cara_sample_cap">Minta jelentés — szemléltető adatokkal</figcaption>
+    </figure>
+
+    <div class="report-legend fade-up delay-1">
+    <h3 class="report-legend-title" data-t="legend_title">Mit tartalmaz a jelentés?</h3>
+    <ol class="legend-grid">
+      <li class="legend-item" data-leg="1"><span class="legend-num">1</span><div><h4 data-t="leg1_t">Iparági standard</h4><p data-t="leg1_d">Diagnosztikánk során a CARA által jóváhagyott, hitelesített Autel műszereket használunk — a független, iparági standardnak megfelelő, objektív mérés garanciája.</p></div></li>
+      <li class="legend-item" data-leg="2"><span class="legend-num">2</span><div><h4 data-t="leg2_t">Jármű- és vizsgálati adatok</h4><p data-t="leg2_d">A jármű és az akkumulátor egyedi azonosítói, típusadatai és a vizsgálat pontos időpontja — minden, ami a jelentést egyértelműen a járműhöz köti.</p></div></li>
+      <li class="legend-item" data-leg="3"><span class="legend-num">3</span><div><h4 data-t="leg3_t">Akkumulátor egészségi állapot (SOH)</h4><p data-t="leg3_d">Részletes akkumulátor-analitika: objektív adatok a cellák egészségi állapotáról, a hőmérséklet-eloszlásról és a feszültségszintek kiegyensúlyozottságáról a teljes csomagban.</p></div></li>
+      <li class="legend-item" data-leg="4"><span class="legend-num">4</span><div><h4 data-t="leg4_t">Becsült hatótáv és energia</h4><p data-t="leg4_d">A jelenlegi kapacitás a gyári értékhez viszonyítva, kWh-ban és becsült WLTP-hatótávban (km) kifejezve.</p></div></li>
+      <li class="legend-item" data-leg="5"><span class="legend-num">5</span><div><h4 data-t="leg5_t">Hibakód-ellenőrzés</h4><p data-t="leg5_d">Az akkumulátor-kezelő rendszer (BMS) által tárolt hibakódok (DTC) megjelenítése és ellenőrzése.</p></div></li>
+      <li class="legend-item" data-leg="6"><span class="legend-num">6</span><div><h4 data-t="leg6_t">Modul- és cellafeszültség</h4><p data-t="leg6_d">Részletes elemzés a modul- és cellafeszültségekről, a gyártó által megadott értékekkel összehasonlítva.</p></div></li>
+      <li class="legend-item" data-leg="7"><span class="legend-num">7</span><div><h4 data-t="leg7_t">Cellánkénti részletes táblázat</h4><p data-t="leg7_d">Minden modul és minden egyes cella feszültsége egy helyen, színkódolt „hőtérképként”, amely azonnal kiemeli a leggyengébb cellákat.</p></div></li>
+      <li class="legend-item" data-leg="8"><span class="legend-num">8</span><div><h4 data-t="leg8_t">Hőmérséklet-konzisztencia</h4><p data-t="leg8_d">Modulonkénti hőmérsékletek a min./max./átlag értékekkel, hogy látható legyen, mennyire egyenletes a csomag hűtése.</p></div></li>
     </ol>
+    </div>
   </div>
 </section>
 
@@ -521,13 +593,11 @@
         <div class="form-group"><label for="lname" data-t="f_lname">Vezetéknév</label><input type="text" id="lname" name="lname" maxlength="50" autocomplete="family-name" data-ph="ph_lname" placeholder="Kovács" required></div>
         <div class="form-group"><label for="email" data-t="f_email">E-mail cím</label><input type="email" id="email" name="email" maxlength="100" autocomplete="email" placeholder="alex@email.com" required></div>
         <div class="form-group"><label for="phone" data-t="f_phone">Telefonszám</label><input type="tel" id="phone" name="phone" maxlength="30" autocomplete="tel" data-ph="ph_phone" placeholder="+36 30 000 0000" required></div>
-        <div class="form-group"><label for="make" data-t="f_make">Jármű márkája</label><input type="text" id="make" name="make" maxlength="40" list="makes-list" autocomplete="off" data-ph="ph_make" placeholder="pl. BMW" required></div>
-        <div class="form-group"><label for="model" data-t="f_model">Modell</label><input type="text" id="model" name="model" maxlength="60" list="models-list" autocomplete="off" data-ph="ph_model" placeholder="pl. i4" required></div>
+        <div class="form-group"><label for="make" data-t="f_make">Jármű márkája</label><div class="combo"><input type="text" id="make" name="make" maxlength="40" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="make-listbox" data-ph="ph_make" placeholder="pl. BMW" required><ul class="combo-list" id="make-listbox" role="listbox" hidden></ul></div></div>
+        <div class="form-group"><label for="model" data-t="f_model">Modell</label><div class="combo"><input type="text" id="model" name="model" maxlength="60" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="model-listbox" data-ph="ph_model" placeholder="pl. i4" required><ul class="combo-list" id="model-listbox" role="listbox" hidden></ul></div></div>
         <div class="form-group"><label for="year" data-t="f_year">Évjárat</label><input type="number" id="year" name="year" min="1995" max="2027" inputmode="numeric" data-ph="ph_year" placeholder="pl. 2022" required></div>
         <div class="form-group"><label for="location" data-t="f_location">Helyszín</label><input type="text" id="location" name="location" maxlength="100" data-ph="ph_location" placeholder="Város, irányítószám" required></div>
-        <datalist id="makes-list"></datalist>
-        <datalist id="models-list"></datalist>
-        <div class="form-group full"><label for="message" data-t="f_message">Van még valami, amit tudnunk kell?</label><textarea id="message" name="message" maxlength="1000" data-ph="ph_message" placeholder="Pl. csökkent hatótáv, figyelmeztető jelzések, vétel vagy eladás előtt..."></textarea></div>
+        <div class="form-group full"><label for="message" data-t="f_message">Időpont információ</label><textarea id="message" name="message" maxlength="1000" data-ph="ph_message" placeholder="Pl. hétköznap délutánonként a munkahelyemen, vagy délelőtt az otthoni címen..."></textarea></div>
       </div>
       <div class="honeypot" aria-hidden="true">
         <label for="botcheck">Leave this field empty</label>
@@ -544,7 +614,7 @@
     <div id="success-msg" class="form-success">
       <div class="success-icon"><svg width="24" height="24" fill="none" stroke="var(--accent)" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
       <h3 data-t="success_title">Kérés megérkezett!</h3>
-      <p data-t="success_desc">Köszönjük a megkeresést! 24 órán belül visszaigazoljuk az időpontot.</p>
+      <p data-t="success_desc">Köszönjük a megkeresést! Hamarosan felvesszük Önnel a kapcsolatot.</p>
       <button type="button" id="book-another" class="btn-submit" style="margin-top:2rem;">
         <span data-t="success_again">Új időpontfoglalás</span>
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -560,7 +630,7 @@
     <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
     <span>info@voltcheck.hu</span>
   </a>
-  <p style="font-size:0.8rem;color:var(--gray);" data-t="footer_copy">© 2025 VoltCheck. Minden jog fenntartva.</p>
+  <p style="font-size:0.8rem;color:var(--gray);" data-t="footer_copy">© 2026 VoltCheck. Minden jog fenntartva.</p>
 </footer>
 
 <script>
@@ -620,7 +690,7 @@ const T = {
     f_model:"Model", ph_model:"e.g. i4",
     f_year:"Year", ph_year:"e.g. 2022",
     f_location:"Your location", ph_location:"Town, postcode",
-    f_message:"Anything else we should know?", ph_message:"E.g. reduced range, warning lights, buying/selling the vehicle...",
+    f_message:"Appointment details", ph_message:"E.g. weekday afternoons at my workplace, or mornings at my home address...",
     f_note:"We'll respond within 24 hours.", f_submit:"Send Request",
     f_sending:"Sending…",
     err_required:"Please fill in all required fields.",
@@ -629,10 +699,10 @@ const T = {
     err_year:"Please enter a valid year (1995–2027).",
     err_network:"Network error. Please check your connection and try again.",
     err_generic:"Something went wrong. Please try again.",
-    success_title:"Request received!", success_desc:"Thanks for getting in touch. We'll confirm your appointment within 24 hours.",
+    success_title:"Request received!", success_desc:"Thanks for getting in touch! We'll contact you soon.",
     success_again:"Book another appointment",
     footer_tagline:"Mobile EV Battery Diagnostics · CARA Approved Reports",
-    footer_copy:"© 2025 VoltCheck. All rights reserved.",
+    footer_copy:"© {year} VoltCheck. All rights reserved.",
     doc_title:"VoltCheck — EV Battery Diagnostics"
   },
   hu: {
@@ -690,7 +760,7 @@ const T = {
     f_model:"Modell", ph_model:"pl. i4",
     f_year:"Évjárat", ph_year:"pl. 2022",
     f_location:"Helyszín", ph_location:"Város, irányítószám",
-    f_message:"Van még valami, amit tudnunk kell?", ph_message:"Pl. csökkent hatótáv, figyelmeztető jelzések, vétel vagy eladás előtt...",
+    f_message:"Időpont információ", ph_message:"Pl. hétköznap délutánonként a munkahelyemen, vagy délelőtt az otthoni címen...",
     f_note:"24 órán belül válaszolunk.", f_submit:"Kérés elküldése",
     f_sending:"Küldés…",
     err_required:"Kérlek, töltsd ki az összes kötelező mezőt.",
@@ -699,10 +769,10 @@ const T = {
     err_year:"Kérlek, adj meg egy érvényes évjáratot (1995–2027).",
     err_network:"Hálózati hiba. Ellenőrizd a kapcsolatot és próbáld újra.",
     err_generic:"Hiba történt. Kérlek, próbáld újra.",
-    success_title:"Kérés megérkezett!", success_desc:"Köszönjük a megkeresést! 24 órán belül visszaigazoljuk az időpontot.",
+    success_title:"Kérés megérkezett!", success_desc:"Köszönjük a megkeresést! Hamarosan felvesszük Önnel a kapcsolatot.",
     success_again:"Új időpontfoglalás",
     footer_tagline:"Mobil EV Akkumulátor Diagnosztika · CARA Tanúsított Jelentések",
-    footer_copy:"© 2025 VoltCheck. Minden jog fenntartva.",
+    footer_copy:"© {year} VoltCheck. Minden jog fenntartva.",
     doc_title:"VoltCheck — EV Akkumulátor Diagnosztika"
   }
 };
@@ -730,15 +800,16 @@ function setLang(l) {
   render();
 }
 
+const YEAR = new Date().getFullYear();
 function render() {
   const t = T[lang];
   document.querySelectorAll('[data-t]').forEach(el => {
     const v = t[el.getAttribute('data-t')];
-    if (v !== undefined) el.textContent = v;
+    if (v !== undefined) el.textContent = v.replace('{year}', YEAR);
   });
   document.querySelectorAll('[data-t-html]').forEach(el => {
     const v = t[el.getAttribute('data-t-html')];
-    if (v !== undefined) el.innerHTML = v;
+    if (v !== undefined) el.innerHTML = v.replace('{year}', YEAR);
   });
   document.querySelectorAll('[data-ph]').forEach(el => {
     const v = t[el.getAttribute('data-ph')];
@@ -826,34 +897,75 @@ const VEHICLES = {
   "Zeekr": ["001", "009", "7X", "X"]
 };
 
-const makesList = document.getElementById('makes-list');
-const modelsList = document.getElementById('models-list');
 const makeInput = document.getElementById('make');
 const modelInput = document.getElementById('model');
 
-function fillDatalist(list, options) {
-  list.innerHTML = '';
-  const frag = document.createDocumentFragment();
-  options.forEach(value => {
-    const o = document.createElement('option');
-    o.value = value;
-    frag.appendChild(o);
-  });
-  list.appendChild(frag);
-}
-
-fillDatalist(makesList, Object.keys(VEHICLES));
-
-function updateModelsFor(rawMake) {
+const modelsForMake = rawMake => {
   const make = (rawMake || '').trim();
-  const exact = VEHICLES[make];
-  if (exact) { fillDatalist(modelsList, exact); return; }
+  if (VEHICLES[make]) return VEHICLES[make];
   const ci = Object.keys(VEHICLES).find(k => k.toLowerCase() === make.toLowerCase());
-  fillDatalist(modelsList, ci ? VEHICLES[ci] : []);
+  return ci ? VEHICLES[ci] : [];
+};
+
+// Custom combobox: filters as you type, opens downward, input-width, capped height.
+function setupCombo(input, getOptions) {
+  const list = document.getElementById(input.getAttribute('aria-controls'));
+  let current = [], activeIndex = -1;
+
+  function close() {
+    if (list.hidden) return;
+    list.hidden = true;
+    input.setAttribute('aria-expanded', 'false');
+    input.removeAttribute('aria-activedescendant');
+    activeIndex = -1;
+  }
+  function open() {
+    const f = input.value.trim().toLowerCase();
+    const all = getOptions();
+    current = f ? all.filter(o => o.toLowerCase().includes(f)) : all.slice();
+    if (!current.length) { close(); return; }
+    list.innerHTML = '';
+    const frag = document.createDocumentFragment();
+    current.forEach((opt, i) => {
+      const li = document.createElement('li');
+      li.className = 'combo-option';
+      li.id = list.id + '-opt-' + i;
+      li.setAttribute('role', 'option');
+      li.textContent = opt;
+      li.addEventListener('mousedown', e => { e.preventDefault(); pick(opt); });
+      frag.appendChild(li);
+    });
+    list.appendChild(frag);
+    list.scrollTop = 0;
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+    activeIndex = -1;
+  }
+  function setActive(i) {
+    const opts = list.querySelectorAll('.combo-option');
+    if (!opts.length) return;
+    activeIndex = (i + opts.length) % opts.length;
+    opts.forEach((o, idx) => o.classList.toggle('active', idx === activeIndex));
+    opts[activeIndex].scrollIntoView({ block: 'nearest' });
+    input.setAttribute('aria-activedescendant', opts[activeIndex].id);
+  }
+  function pick(opt) { input.value = opt; close(); }
+
+  input.addEventListener('focus', open);
+  input.addEventListener('input', open);
+  input.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown') { e.preventDefault(); if (list.hidden) open(); else setActive(activeIndex + 1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); if (!list.hidden) setActive(activeIndex - 1); }
+    else if (e.key === 'Enter') { if (!list.hidden && activeIndex >= 0) { e.preventDefault(); pick(current[activeIndex]); } }
+    else if (e.key === 'Escape') { close(); }
+  });
+  input.addEventListener('blur', () => setTimeout(close, 120));
+
+  return { close };
 }
 
-makeInput.addEventListener('input', () => updateModelsFor(makeInput.value));
-makeInput.addEventListener('change', () => updateModelsFor(makeInput.value));
+setupCombo(makeInput, () => Object.keys(VEHICLES));
+const modelCombo = setupCombo(modelInput, () => modelsForMake(makeInput.value));
 
 // Form
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -990,7 +1102,7 @@ form.addEventListener('submit', async (e) => {
 
 document.getElementById('book-another').addEventListener('click', () => {
   form.reset();
-  fillDatalist(modelsList, []);
+  modelCombo.close();
   clearError();
   form.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
   const submitBtn = form.querySelector('.btn-submit');
@@ -1004,6 +1116,90 @@ document.getElementById('book-another').addEventListener('click', () => {
 
 const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), {threshold:0.1});
 document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// Report pins ↔ legend: hover/focus highlight + scroll (desktop), tap popover (mobile).
+// The full point-by-point list below stays available on all sizes.
+(function() {
+  const legendByNum = n => document.querySelector('.legend-item[data-leg="' + n + '"]');
+  const pinByNum = n => document.querySelector('.report-pin[data-pin="' + n + '"]');
+  const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
+
+  const pop = document.querySelector('.report-popover');
+  const popNum = pop && pop.querySelector('.report-popover__num');
+  const popTitle = pop && pop.querySelector('.report-popover__title');
+  const popDesc = pop && pop.querySelector('.report-popover__desc');
+  let activePin = null;
+
+  function clearHighlight() {
+    if (activePin) activePin.classList.remove('active');
+    document.querySelectorAll('.legend-item.legend-active').forEach(el => el.classList.remove('legend-active'));
+  }
+  function closePopover() {
+    if (!pop) return;
+    pop.classList.remove('open');
+    pop.setAttribute('aria-hidden', 'true');
+    clearHighlight();
+    activePin = null;
+  }
+  function openPopover(pin) {
+    const item = legendByNum(pin.dataset.pin);
+    if (!pop || !item) return;
+    popNum.textContent = pin.dataset.pin;
+    popTitle.textContent = item.querySelector('h4').textContent;
+    popDesc.textContent = item.querySelector('p').textContent;
+    clearHighlight();
+    pin.classList.add('active'); item.classList.add('legend-active');
+    activePin = pin;
+    // place near the pin, inside the image box, clamped so it stays visible
+    const media = pin.closest('.cara-report-media');
+    const W = media.clientWidth, H = media.clientHeight;
+    const px = W * parseFloat(pin.style.left) / 100;
+    const py = H * parseFloat(pin.style.top) / 100;
+    pop.style.visibility = 'hidden';
+    pop.classList.add('open');
+    const pw = pop.offsetWidth, ph = pop.offsetHeight;
+    const left = Math.max(8, Math.min(px - pw / 2, W - pw - 8));
+    let top = py - ph - 16;
+    if (top < 4) top = py + 18;
+    top = Math.max(4, Math.min(top, H - ph - 8));
+    pop.style.left = left + 'px';
+    pop.style.top = top + 'px';
+    pop.style.visibility = '';
+    pop.setAttribute('aria-hidden', 'false');
+  }
+
+  document.querySelectorAll('.report-pin').forEach(pin => {
+    const item = legendByNum(pin.dataset.pin);
+    const set = on => { pin.classList.toggle('active', on); if (item) item.classList.toggle('legend-active', on); };
+    pin.addEventListener('mouseenter', () => { if (!isMobile()) set(true); });
+    pin.addEventListener('mouseleave', () => { if (!isMobile()) set(false); });
+    pin.addEventListener('focus', () => { if (!isMobile()) set(true); });
+    pin.addEventListener('blur', () => { if (!isMobile()) set(false); });
+    pin.addEventListener('click', e => {
+      if (isMobile()) {
+        e.stopPropagation();
+        if (activePin === pin) closePopover(); else openPopover(pin);
+      } else if (item) {
+        item.scrollIntoView({behavior: 'smooth', block: 'center'});
+      }
+    });
+  });
+  document.querySelectorAll('.legend-item[data-leg]').forEach(item => {
+    const pin = pinByNum(item.dataset.leg);
+    if (!pin) return;
+    item.addEventListener('mouseenter', () => { if (!isMobile()) pin.classList.add('active'); });
+    item.addEventListener('mouseleave', () => { if (!isMobile()) pin.classList.remove('active'); });
+  });
+
+  if (pop) {
+    pop.querySelector('.report-popover__close').addEventListener('click', e => { e.stopPropagation(); closePopover(); });
+    pop.addEventListener('click', e => e.stopPropagation());
+    document.addEventListener('click', e => {
+      if (pop.classList.contains('open') && !e.target.closest('.report-pin') && !e.target.closest('.report-popover')) closePopover();
+    });
+    window.addEventListener('resize', closePopover);
+  }
+})();
 
 // Apply detected language (re-renders text + sets active lang button + html lang attr)
 setLang(lang);
