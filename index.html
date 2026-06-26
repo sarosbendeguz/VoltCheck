@@ -48,6 +48,9 @@
   .nav-right { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
   .nav-cta { font-family: 'DM Sans', sans-serif; font-size: 0.875rem; font-weight: 500; background: var(--accent); color: var(--black); padding: 0.55rem 1.4rem; border-radius: 100px; text-decoration: none; transition: opacity 0.2s, transform 0.2s; display: inline-block; white-space: nowrap; }
   .nav-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+  .nav-phone { display: flex; align-items: center; gap: 7px; font-size: 0.875rem; font-weight: 500; color: var(--white); text-decoration: none; white-space: nowrap; transition: color 0.2s; }
+  .nav-phone:hover { color: var(--accent); }
+  .nav-phone svg { color: var(--accent); flex-shrink: 0; }
 
   .lang-switch { display: flex; align-items: center; background: rgba(255,255,255,0.06); border: 0.5px solid var(--border); border-radius: 100px; padding: 3px; gap: 2px; }
   .lang-btn { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; color: var(--gray); background: none; border: none; cursor: pointer; padding: 4px 10px; border-radius: 100px; transition: all 0.2s; }
@@ -65,6 +68,7 @@
   .mobile-menu.open { display: flex; }
   .mobile-menu a { display: block; padding: 1.1rem 0.25rem; border-bottom: 0.5px solid var(--border); font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 600; color: var(--white); text-decoration: none; letter-spacing: -0.01em; }
   .mobile-menu a:active { color: var(--accent); }
+  .mobile-menu a.mobile-menu-phone { color: var(--accent); }
 
   .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 8rem 3rem 5rem; position: relative; overflow: hidden; }
   .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(26,122,74,0.18) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 10% 80%, rgba(200,240,101,0.06) 0%, transparent 60%); }
@@ -184,6 +188,70 @@
   .cara-report img { display: block; width: 100%; height: auto; }
   .cara-report figcaption { font-size: 0.75rem; color: var(--gray); text-align: center; padding: 0.85rem 1rem; background: var(--black); border-top: 0.5px solid var(--border); }
 
+  /* ── Sample report rendered as HTML (replaces the old PNG) ───────────────
+     Scaled like an image via container-query units: one font-size on .report-doc
+     drives every internal `em` size, so the whole document shrinks uniformly. */
+  .cara-report-media { container-type: inline-size; }
+  .report-doc {
+    --rb-green: #1fb866; --rb-ink: #181b1f; --rb-muted: #767d86;
+    --rb-line: #e7e9ec; --rb-bar: #16181c; --rb-soh: #e7f8ee;
+    font-family: 'DM Sans', sans-serif; color: var(--rb-ink); background: #fff;
+    font-size: clamp(6px, calc(100cqw / 58), 12px); line-height: 1.45;
+    padding: 2.6em 2.6em 2.2em; -webkit-font-smoothing: antialiased;
+  }
+  .rb-doc-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1em; padding-bottom: 1.4em; border-bottom: 0.18em solid var(--rb-ink); }
+  .rb-brand { display: flex; align-items: center; gap: 0.7em; }
+  .rb-brand .rb-bolt { width: 2.2em; height: 2.2em; flex-shrink: 0; }
+  .rb-brand-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.85em; letter-spacing: -0.01em; line-height: 1; display: flex; align-items: center; gap: 0.18em; }
+  .rb-brand-dot { width: 0.32em; height: 0.32em; border-radius: 50%; background: var(--rb-green); display: inline-block; transform: translateY(0.55em); }
+  .rb-brand-sub { font-size: 0.72em; letter-spacing: 0.18em; color: var(--rb-muted); margin-top: 0.4em; text-transform: uppercase; }
+  .rb-cert { text-align: right; flex-shrink: 0; }
+  .rb-autel { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 1.15em; color: #e2231a; letter-spacing: 0.02em; }
+  .rb-cara { margin-top: 0.3em; background: #122a6b; border-radius: 0.4em; padding: 0.5em 0.8em; color: #fff; line-height: 1.15; }
+  .rb-cara b { font-family: 'Space Grotesk', sans-serif; font-size: 1.25em; letter-spacing: 0.04em; }
+  .rb-cara span { display: block; font-size: 0.62em; letter-spacing: 0.02em; color: #c6d2f5; }
+  .rb-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 2.3em; letter-spacing: -0.02em; margin: 1.3em 0 0.15em; }
+  .rb-title-sub { font-size: 1em; color: var(--rb-muted); margin-bottom: 1.4em; }
+  .rb-bar { background: var(--rb-bar); color: var(--rb-green); font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.95em; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.7em 1.1em; border-radius: 0.55em; margin: 1.6em 0 1.2em; }
+  .rb-kv-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2.6em; }
+  .rb-kv { display: flex; align-items: baseline; justify-content: space-between; gap: 1em; padding: 0.55em 0; border-bottom: 0.08em solid var(--rb-line); }
+  .rb-kv .k { color: var(--rb-muted); font-size: 0.95em; }
+  .rb-kv .v { font-weight: 700; font-size: 0.98em; text-align: right; }
+  .rb-pack { display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: 1.6em; align-items: start; }
+  .rb-soh { background: var(--rb-soh); border-radius: 0.7em; padding: 1.4em 1em; text-align: center; }
+  .rb-soh-label { font-size: 0.92em; color: #2f7a52; font-weight: 600; }
+  .rb-soh-num { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 3.6em; line-height: 1; letter-spacing: -0.02em; margin: 0.12em 0; }
+  .rb-soh-num small { font-size: 0.45em; font-weight: 600; }
+  .rb-soh-tag { font-size: 0.85em; color: var(--rb-muted); font-weight: 600; letter-spacing: 0.04em; }
+  .rb-col-h { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.05em; padding-bottom: 0.5em; border-bottom: 0.08em solid var(--rb-line); margin-bottom: 0.6em; }
+  .rb-line-kv { display: flex; align-items: baseline; justify-content: space-between; gap: 0.6em; padding: 0.4em 0; font-size: 0.92em; }
+  .rb-line-kv .k { color: var(--rb-muted); }
+  .rb-line-kv .v { font-weight: 700; }
+  .rb-meter { margin-top: 1.5em; }
+  .rb-meter-top { display: flex; align-items: baseline; justify-content: space-between; gap: 1em; margin-bottom: 0.45em; }
+  .rb-meter-top .lbl { font-weight: 700; font-size: 1em; }
+  .rb-meter-top .val { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.95em; }
+  .rb-meter-top .val b { color: var(--rb-green); }
+  .rb-meter-top .val span { color: var(--rb-muted); }
+  .rb-track { position: relative; height: 0.85em; border-radius: 1em; background: #eceef1; overflow: hidden; }
+  .rb-track i { position: absolute; inset: 0 0 0 0; background: linear-gradient(90deg, #1fb866, #19a558); border-radius: 1em; }
+  .rb-foot-note { font-size: 0.78em; color: var(--rb-muted); line-height: 1.5; margin-top: 1.6em; }
+  .rb-ok { display: flex; align-items: center; gap: 0.7em; background: #f3f5f7; border-radius: 0.6em; padding: 0.95em 1.1em; font-size: 0.98em; font-weight: 500; }
+  .rb-ok svg { width: 1.5em; height: 1.5em; flex-shrink: 0; }
+  .rb-divider { height: 0.08em; background: var(--rb-line); margin: 2.2em 0 0; }
+  .rb-section-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.7em; margin: 1.5em 0 0; }
+  .rb-legend-scale { display: flex; align-items: center; gap: 0.7em; flex-wrap: wrap; font-size: 0.85em; color: var(--rb-muted); margin: 1.2em 0 0.8em; justify-content: flex-end; }
+  .rb-legend-scale .grad { width: 5em; height: 0.7em; border-radius: 1em; background: linear-gradient(90deg, #fff, #1fb866); border: 0.08em solid var(--rb-line); }
+  .rb-legend-scale .chip { display: inline-flex; align-items: center; gap: 0.3em; }
+  .rb-legend-scale .dot { width: 1.1em; height: 1.1em; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8em; color: #fff; }
+  .rb-cells { width: 100%; border-collapse: collapse; font-size: 0.82em; table-layout: fixed; }
+  .rb-cells th, .rb-cells td { padding: 0.5em 0.2em; text-align: center; border: 0.06em solid #eef0f2; }
+  .rb-cells thead th { background: var(--rb-bar); color: #fff; font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: 0.04em; }
+  .rb-cells thead .grp-cella { color: var(--rb-green); }
+  .rb-cells .rb-mod { text-align: left; font-weight: 700; padding-left: 0.6em; white-space: nowrap; }
+  .rb-cells .rb-modv { font-weight: 700; }
+  .rb-cells tbody td { font-variant-numeric: tabular-nums; }
+
   .report-intro { max-width: 720px; }
   .report-intro .section-title { margin-bottom: 1rem; }
 
@@ -284,6 +352,7 @@
     nav { padding: 1rem 1.25rem; }
     .nav-links { display: none; }
     .nav-cta { display: none; }
+    .nav-phone { display: none; }
     .nav-toggle { display: inline-flex; }
     .mobile-menu a.mobile-menu-cta { margin-top: 1.5rem; padding: 0.95rem 1rem; border-bottom: none; border-radius: 100px; background: var(--accent); color: var(--black); text-align: center; font-size: 1.05rem; }
     section { padding: 4rem 1.5rem; }
@@ -320,6 +389,10 @@
       <button class="lang-btn" type="button" data-lang="en">EN</button>
       <button class="lang-btn active" type="button" data-lang="hu">HU</button>
     </div>
+    <a href="tel:+36203863602" class="nav-phone" aria-label="+36 20 386 3602">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+      <span>+36 20 386 3602</span>
+    </a>
     <a href="#contact" class="nav-cta" data-t="nav_cta">Időpontfoglalás</a>
     <button class="nav-toggle" type="button" aria-label="Menü" aria-controls="mobile-menu" aria-expanded="false">
       <svg class="icon-open" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -334,6 +407,7 @@
   <a href="#why" data-t="nav_why">Kinek hasznos</a>
   <a href="#pricing" data-t="nav_price">Árak</a>
   <a href="#contact" data-t="nav_contact">Kapcsolat</a>
+  <a href="tel:+36203863602" class="mobile-menu-phone">+36 20 386 3602</a>
   <a href="#contact" class="mobile-menu-cta" data-t="nav_cta">Időpontfoglalás</a>
 </div>
 
@@ -527,20 +601,115 @@
     </div>
   </div>
 
-  <!-- image (with numbered pins) beside the matching numbered explanation.
-       Pin coords are % of the sample-report.png box — recheck if that image is regenerated. -->
+  <!-- Sample report rendered as live HTML (built from new-pdf-reference.pdf).
+       The cell-voltage heatmap rows are generated by the script near the bottom (RB_CELLS).
+       Pin coords are % of the .report-doc box — re-tune if the report layout changes. -->
   <div class="report-showcase">
     <figure class="cara-report fade-up">
       <div class="cara-report-media">
-        <img src="assets/sample-report.png" alt="VoltCheck akkumulátor-állapotjelentés mintaoldal (példa adatokkal)" loading="lazy" />
-        <button type="button" class="report-pin" data-pin="1" style="left:80%; top:6%;" aria-label="1">1</button>
-        <button type="button" class="report-pin" data-pin="2" style="left:24%; top:17%;" aria-label="2">2</button>
-        <button type="button" class="report-pin" data-pin="3" style="left:20%; top:27%;" aria-label="3">3</button>
-        <button type="button" class="report-pin" data-pin="4" style="left:13%; top:37%;" aria-label="4">4</button>
-        <button type="button" class="report-pin" data-pin="5" style="left:16%; top:47%;" aria-label="5">5</button>
-        <button type="button" class="report-pin" data-pin="6" style="left:30%; top:53%;" aria-label="6">6</button>
-        <button type="button" class="report-pin" data-pin="7" style="left:50%; top:64%;" aria-label="7">7</button>
-        <button type="button" class="report-pin" data-pin="8" style="left:45%; top:82%;" aria-label="8">8</button>
+        <div class="report-doc" aria-label="VoltCheck akkumulátor-állapotjelentés mintaoldal (példa adatokkal)">
+          <header class="rb-doc-head">
+            <div class="rb-brand">
+              <svg class="rb-bolt" viewBox="0 0 24 24" fill="none"><path d="M13 10V3L4 14h7v7l9-11h-7z" fill="#1fb866"/></svg>
+              <div>
+                <div class="rb-brand-name">VoltCheck<span class="rb-brand-dot"></span></div>
+                <div class="rb-brand-sub">Akkumulátor Diagnosztika</div>
+              </div>
+            </div>
+            <div class="rb-cert">
+              <div class="rb-autel">AUTEL<sup>®</sup></div>
+              <div class="rb-cara"><b>★CARA</b><span>Approved Battery Health Check</span></div>
+            </div>
+          </header>
+
+          <h2 class="rb-title">Akkumulátor-állapotjelentés</h2>
+          <div class="rb-title-sub">SOH Gyorsteszt</div>
+
+          <div class="rb-bar">Jármű adatok</div>
+          <div class="rb-kv-grid">
+            <div class="rb-kv"><span class="k">Modell:</span><span class="v">2023/Opel/MOKKA</span></div>
+            <div class="rb-kv"><span class="k">Teszt időpontja:</span><span class="v">2026-06-18 16:43:13</span></div>
+            <div class="rb-kv"><span class="k">Névleges feszültség:</span><span class="v">400 V</span></div>
+            <div class="rb-kv"><span class="k">Névleges kapacitás:</span><span class="v">125 Ah</span></div>
+            <div class="rb-kv"><span class="k">Kilométeróra-állás:</span><span class="v">15298.7km</span></div>
+            <div class="rb-kv"><span class="k">Alvázszám:</span><span class="v">VXKUKZKXZPW101956</span></div>
+            <div class="rb-kv"><span class="k">Sorozatszám:</span><span class="v">VA9GR3C01365</span></div>
+            <div class="rb-kv"><span class="k">Töltöttség (SOC):</span><span class="v">60 %</span></div>
+          </div>
+
+          <div class="rb-bar">Akkumulátor-csomag információk</div>
+          <div class="rb-pack">
+            <div class="rb-soh">
+              <div class="rb-soh-label">Akkumulátor egészségi állapot</div>
+              <div class="rb-soh-num">100 <small>%</small></div>
+              <div class="rb-soh-tag">SOH*</div>
+            </div>
+            <div>
+              <div class="rb-col-h">Hőmérséklet-konzisztencia</div>
+              <div class="rb-line-kv"><span class="k">Akkumulátor hőmérséklet:</span><span class="v">27 °C</span></div>
+              <div class="rb-line-kv"><span class="k">Max. hőmérsékletkülönbség:</span><span class="v">1 °C</span></div>
+            </div>
+            <div>
+              <div class="rb-col-h">Feszültség-konzisztencia</div>
+              <div class="rb-line-kv"><span class="k">Akkumulátor feszültség:</span><span class="v">408.80 V</span></div>
+              <div class="rb-line-kv"><span class="k">Max. feszültségkülönbség:</span><span class="v">22 mV</span></div>
+            </div>
+          </div>
+
+          <div class="rb-meter">
+            <div class="rb-meter-top"><span class="lbl">Energia</span><span class="val"><b>50 kWh</b> <span>| 50 kWh</span></span></div>
+            <div class="rb-track"><i style="width:100%"></i></div>
+          </div>
+          <div class="rb-meter">
+            <div class="rb-meter-top"><span class="lbl">Új jármű hatótávja teljes töltéssel (WLTP)</span><span class="val"><b>338 km</b> <span>| 338 km</span></span></div>
+            <div class="rb-track"><i style="width:100%"></i></div>
+          </div>
+
+          <p class="rb-foot-note">*A SOH érték a BMS adatai vagy a jármű gyártójának kapcsolódó adatai alapján kerül kiszámításra. A VoltCheck nem vállal garanciát az akkumulátor tényleges SOH értékét vagy fizikai állapotát illetően.</p>
+
+          <div class="rb-bar">Akkumulátor hibakódok</div>
+          <div class="rb-ok">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#1fb866"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Nincs észlelt hibakód</span>
+          </div>
+
+          <div class="rb-divider"></div>
+          <h3 class="rb-section-title">Teszt paraméterek</h3>
+
+          <div class="rb-bar">Modul- és cella feszültség információk</div>
+          <div class="rb-kv-grid">
+            <div class="rb-kv"><span class="k">Maximum modul feszültség:</span><span class="v">22.71 V</span></div>
+            <div class="rb-kv"><span class="k">Minimum modul feszültség:</span><span class="v">22.68 V</span></div>
+            <div class="rb-kv"><span class="k">Átlagos modul feszültség:</span><span class="v">22.7 V</span></div>
+            <div class="rb-kv"><span class="k">Modul feszültség különbség:</span><span class="v">0.02 V</span></div>
+            <div class="rb-kv"><span class="k">Alap modul feszültség különbség:</span><span class="v">0.01 V</span></div>
+            <div class="rb-kv"><span class="k">Maximum cella feszültség:</span><span class="v">3.789 V</span></div>
+            <div class="rb-kv"><span class="k">Minimum cella feszültség:</span><span class="v">3.767 V</span></div>
+            <div class="rb-kv"><span class="k">Átlagos cella feszültség:</span><span class="v">3.783 V</span></div>
+            <div class="rb-kv"><span class="k">Cella feszültség különbség:</span><span class="v">22 mV</span></div>
+            <div class="rb-kv"><span class="k">Alap cella feszültség különbség:</span><span class="v">3 mV</span></div>
+          </div>
+          <div class="rb-legend-scale">
+            <span>Alacsony</span><span class="grad"></span><span>Magas</span>
+            <span class="chip"><span class="dot" style="background:#f0a800">!</span> Figyelmeztetés</span>
+            <span class="chip"><span class="dot" style="background:#e2231a">!</span> Nem OK</span>
+          </div>
+          <table class="rb-cells">
+            <thead>
+              <tr><th colspan="2">Modul</th><th class="grp-cella" colspan="8">Cella</th></tr>
+              <tr><th></th><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th></tr>
+            </thead>
+            <tbody id="rb-cells-body"><!-- rows injected by script --></tbody>
+          </table>
+        </div>
+        <button type="button" class="report-pin" data-pin="1" style="left:86%; top:4.5%;" aria-label="1">1</button>
+        <button type="button" class="report-pin" data-pin="2" style="left:20%; top:19.5%;" aria-label="2">2</button>
+        <button type="button" class="report-pin" data-pin="3" style="left:9%; top:26.5%;" aria-label="3">3</button>
+        <button type="button" class="report-pin" data-pin="4" style="left:52%; top:28%;" aria-label="4">4</button>
+        <button type="button" class="report-pin" data-pin="5" style="left:50%; top:35.8%;" aria-label="5">5</button>
+        <button type="button" class="report-pin" data-pin="6" style="left:28%; top:47%;" aria-label="6">6</button>
+        <button type="button" class="report-pin" data-pin="7" style="left:24%; top:61.5%;" aria-label="7">7</button>
+        <button type="button" class="report-pin" data-pin="8" style="left:50%; top:82.5%;" aria-label="8">8</button>
         <div class="report-popover" role="dialog" aria-hidden="true">
           <button type="button" class="report-popover__close" aria-label="Bezárás"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
           <span class="report-popover__num"></span>
@@ -554,14 +723,16 @@
     <div class="report-legend fade-up delay-1">
     <h3 class="report-legend-title" data-t="legend_title">Mit tartalmaz a jelentés?</h3>
     <ol class="legend-grid">
+      <!-- Order follows the report top-to-bottom. data-leg/pin = display number; the data-t key
+           suffix is just the (stable) translation id and need not match the number. -->
       <li class="legend-item" data-leg="1"><span class="legend-num">1</span><div><h4 data-t="leg1_t">Iparági standard</h4><p data-t="leg1_d">Diagnosztikánk során a CARA által jóváhagyott, hitelesített Autel műszereket használunk — a független, iparági standardnak megfelelő, objektív mérés garanciája.</p></div></li>
       <li class="legend-item" data-leg="2"><span class="legend-num">2</span><div><h4 data-t="leg2_t">Jármű- és vizsgálati adatok</h4><p data-t="leg2_d">A jármű és az akkumulátor egyedi azonosítói, típusadatai és a vizsgálat pontos időpontja — minden, ami a jelentést egyértelműen a járműhöz köti.</p></div></li>
       <li class="legend-item" data-leg="3"><span class="legend-num">3</span><div><h4 data-t="leg3_t">Akkumulátor egészségi állapot (SOH)</h4><p data-t="leg3_d">Részletes akkumulátor-analitika: objektív adatok a cellák egészségi állapotáról, a hőmérséklet-eloszlásról és a feszültségszintek kiegyensúlyozottságáról a teljes csomagban.</p></div></li>
-      <li class="legend-item" data-leg="4"><span class="legend-num">4</span><div><h4 data-t="leg4_t">Becsült hatótáv és energia</h4><p data-t="leg4_d">A jelenlegi kapacitás a gyári értékhez viszonyítva, kWh-ban és becsült WLTP-hatótávban (km) kifejezve.</p></div></li>
-      <li class="legend-item" data-leg="5"><span class="legend-num">5</span><div><h4 data-t="leg5_t">Hibakód-ellenőrzés</h4><p data-t="leg5_d">Az akkumulátor-kezelő rendszer (BMS) által tárolt hibakódok (DTC) megjelenítése és ellenőrzése.</p></div></li>
-      <li class="legend-item" data-leg="6"><span class="legend-num">6</span><div><h4 data-t="leg6_t">Modul- és cellafeszültség</h4><p data-t="leg6_d">Részletes elemzés a modul- és cellafeszültségekről, a gyártó által megadott értékekkel összehasonlítva.</p></div></li>
-      <li class="legend-item" data-leg="7"><span class="legend-num">7</span><div><h4 data-t="leg7_t">Cellánkénti részletes táblázat</h4><p data-t="leg7_d">Minden modul és minden egyes cella feszültsége egy helyen, színkódolt „hőtérképként”, amely azonnal kiemeli a leggyengébb cellákat.</p></div></li>
-      <li class="legend-item" data-leg="8"><span class="legend-num">8</span><div><h4 data-t="leg8_t">Hőmérséklet-konzisztencia</h4><p data-t="leg8_d">Modulonkénti hőmérsékletek a min./max./átlag értékekkel, hogy látható legyen, mennyire egyenletes a csomag hűtése.</p></div></li>
+      <li class="legend-item" data-leg="4"><span class="legend-num">4</span><div><h4 data-t="leg8_t">Hőmérséklet-konzisztencia</h4><p data-t="leg8_d">Modulonkénti hőmérsékletek a min./max./átlag értékekkel, hogy látható legyen, mennyire egyenletes a csomag hűtése.</p></div></li>
+      <li class="legend-item" data-leg="5"><span class="legend-num">5</span><div><h4 data-t="leg4_t">Becsült hatótáv és energia</h4><p data-t="leg4_d">A jelenlegi kapacitás a gyári értékhez viszonyítva, kWh-ban és becsült WLTP-hatótávban (km) kifejezve.</p></div></li>
+      <li class="legend-item" data-leg="6"><span class="legend-num">6</span><div><h4 data-t="leg5_t">Hibakód-ellenőrzés</h4><p data-t="leg5_d">Az akkumulátor-kezelő rendszer (BMS) által tárolt hibakódok (DTC) megjelenítése és ellenőrzése.</p></div></li>
+      <li class="legend-item" data-leg="7"><span class="legend-num">7</span><div><h4 data-t="leg6_t">Modul- és cellafeszültség</h4><p data-t="leg6_d">Részletes elemzés a modul- és cellafeszültségekről, a gyártó által megadott értékekkel összehasonlítva.</p></div></li>
+      <li class="legend-item" data-leg="8"><span class="legend-num">8</span><div><h4 data-t="leg7_t">Cellánkénti részletes táblázat</h4><p data-t="leg7_d">Minden modul és minden egyes cella feszültsége egy helyen, színkódolt „hőtérképként”, amely azonnal kiemeli a leggyengébb cellákat.</p></div></li>
     </ol>
     </div>
   </div>
@@ -570,7 +741,7 @@
 <section id="why">
   <div class="section-label fade-up" data-t="why_label">Kinek hasznos</div>
   <h2 class="section-title fade-up delay-1" data-t="why_title">Miért hasznos ez neked?</h2>
-  <p class="section-sub fade-up delay-2" data-t="why_sub">Akár eladnád, akár megvennéd, akár csak ismerned szeretnéd az autód — egy hiteles akkumulátor-jelentés a te oldaladra állítja a tényeket.</p>
+  <p class="section-sub fade-up delay-2" data-t="why_sub">Akár eladnád, akár megvennéd, akár csak ismerni szeretnéd az autód — egy hiteles akkumulátor-jelentés a te oldaladra állítja a tényeket.</p>
   <div class="steps-grid">
     <div class="step fade-up">
       <div class="step-icon"><svg width="22" height="22" fill="none" stroke="var(--accent)" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><circle cx="7" cy="7" r="1.5"/></svg></div>
@@ -664,6 +835,10 @@
   <a class="footer-contact" href="mailto:info@voltcheck.hu">
     <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
     <span>info@voltcheck.hu</span>
+  </a>
+  <a class="footer-contact" href="tel:+36203863602">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+    <span>+36 20 386 3602</span>
   </a>
   <p style="font-size:0.8rem;color:var(--gray);" data-t="footer_copy">© 2026 VoltCheck. Minden jog fenntartva.</p>
 </footer>
@@ -787,7 +962,7 @@ const T = {
     leg7_t:"Cellánkénti részletes táblázat", leg7_d:"Minden modul és minden egyes cella feszültsége egy helyen, színkódolt „hőtérképként”, amely azonnal kiemeli a leggyengébb cellákat.",
     leg8_t:"Hőmérséklet-konzisztencia", leg8_d:"Modulonkénti hőmérsékletek a min./max./átlag értékekkel, hogy látható legyen, mennyire egyenletes a csomag hűtése.",
     why_label:"Kinek hasznos", why_title:"Miért hasznos ez neked?",
-    why_sub:"Akár eladnád, akár megvennéd, akár csak ismerned szeretnéd az autód — egy független akkumulátor-jelentés a te oldaladra állítja a tényeket.",
+    why_sub:"Akár eladnád, akár megvennéd, akár csak ismerni szeretnéd az autód — egy független akkumulátor-jelentés a te oldaladra állítja a tényeket.",
     why1_title:"Ha eladnád az autódat", why1_desc:"Értékesíts gyorsabban és magasabb áron! A használt elektromos autók piacán a vevők legnagyobb félelme az akkumulátor ismeretlen állapota. Egy független, professzionális akkumulátor-diagnosztikai tanúsítvány birtokában átláthatóvá és számszerűsíthetővé teszed az autó legértékesebb alkatrészének állapotát. Ezzel a bizalomépítő dokumentummal nemcsak a döntés folyamatát rövidítheted le, de a hiteles állapotfelmérésnek köszönhetően könnyebben érhetsz el piaci ár feletti eladási értéket is.",
     why2_title:"Ha elektromos autó tulajdonos vagy", why2_desc:"Előzd meg a költséges meghibásodásokat! Az elektromos autó akkumulátora komplex rendszert alkot, amelynek élettartamát a környezeti és használati tényezők alapvetően meghatározzák. A rendszeres, évenkénti diagnosztika segítségével olyan rejtett hibák – például a hűtési/fűtési (termó menedzsment) rendszer rendellenességei – is idejében kimutathatók, amelyek hosszú távon visszafordíthatatlan károkat okozhatnának a cellákban. A részletes vizsgálat nemcsak biztonságot nyújt, de pontos képet ad vezetési szokásaid akkumulátorra gyakorolt hatásáról is, segítve az akku kíméletesebb használatát.",
     why3_title:"Ha épp vásárlás előtt állsz", why3_desc:"Tudd meg, mit veszel, mielőtt kifizetnéd! Használt elektromos autó vásárlása esetén az akkumulátor állapota a legkritikusabb kérdés, hiszen ennek cseréje a legköltségesebb tétel. Helyszíni kiszállással végzett professzionális diagnosztikánk azonnali, objektív választ ad arra, hogy az akkumulátor valóban azt a teljesítményt nyújtja-e, amit az eladó ígért. Szolgáltatásunkkal teljes biztonságban vághatsz bele a vásárlásba: elkerülheted a rejtett hibákat és a későbbi, váratlanul magas szervizköltségeket, így valóban egy biztonságos, megbízható járműbe fektethetsz.",
@@ -1161,6 +1336,48 @@ document.getElementById('book-another').addEventListener('click', () => {
 
 const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), {threshold:0.1});
 document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// Build the sample report's cell-voltage heatmap (data + colours from new-pdf-reference.pdf).
+(function() {
+  const body = document.getElementById('rb-cells-body');
+  if (!body) return;
+  // [module label, module voltage, [cell 1..6 voltages]]
+  const RB_CELLS = [
+    ['M1 (#1–#6)', '22.70 V', [3.784,3.784,3.784,3.784,3.785,3.783]],
+    ['M2 (#7–#12)', '22.70 V', [3.783,3.782,3.784,3.782,3.782,3.784]],
+    ['M3 (#13–#18)', '22.69 V', [3.783,3.781,3.784,3.782,3.782,3.781]],
+    ['M4 (#19–#24)', '22.71 V', [3.781,3.785,3.779,3.788,3.788,3.786]],
+    ['M5 (#25–#30)', '22.68 V', [3.779,3.767,3.787,3.782,3.784,3.785]],
+    ['M6 (#31–#36)', '22.69 V', [3.781,3.779,3.786,3.779,3.779,3.784]],
+    ['M7 (#37–#42)', '22.70 V', [3.781,3.783,3.786,3.784,3.784,3.780]],
+    ['M8 (#43–#48)', '22.70 V', [3.784,3.785,3.789,3.781,3.784,3.780]],
+    ['M9 (#49–#54)', '22.69 V', [3.781,3.782,3.781,3.783,3.779,3.781]],
+    ['M10 (#55–#60)', '22.70 V', [3.782,3.780,3.783,3.786,3.784,3.784]],
+    ['M11 (#61–#66)', '22.70 V', [3.784,3.782,3.784,3.784,3.784,3.781]],
+    ['M12 (#67–#72)', '22.70 V', [3.784,3.782,3.782,3.784,3.783,3.783]],
+    ['M13 (#73–#78)', '22.71 V', [3.784,3.784,3.786,3.785,3.785,3.784]],
+    ['M14 (#79–#84)', '22.69 V', [3.780,3.785,3.779,3.786,3.779,3.783]],
+    ['M15 (#85–#90)', '22.69 V', [3.780,3.781,3.783,3.779,3.779,3.783]],
+    ['M16 (#91–#96)', '22.70 V', [3.783,3.783,3.784,3.785,3.786,3.781]],
+    ['M17 (#97–#102)', '22.70 V', [3.782,3.785,3.784,3.784,3.783,3.780]],
+    ['M18 (#103–#108)', '22.69 V', [3.784,3.780,3.779,3.786,3.781,3.785]],
+  ];
+  const all = RB_CELLS.flatMap(r => r[2]);
+  const lo = Math.min(...all), hi = Math.max(...all), span = hi - lo || 1;
+  const fmt = v => (v % 1 === 0 ? v.toFixed(0) : String(v));
+  let html = '';
+  for (const [mod, mv, cells] of RB_CELLS) {
+    html += '<tr><td class="rb-mod">' + mod + '</td><td class="rb-modv">' + mv + '</td>';
+    for (let i = 0; i < 8; i++) {
+      if (i >= cells.length) { html += '<td></td>'; continue; }
+      const t = (cells[i] - lo) / span;            // 0 = lowest (white), 1 = highest (green)
+      const a = (0.10 + t * 0.55).toFixed(2);
+      html += '<td style="background:rgba(31,184,102,' + a + ')">' + fmt(cells[i]) + ' V</td>';
+    }
+    html += '</tr>';
+  }
+  body.innerHTML = html;
+})();
 
 // Report pins ↔ legend: hover/focus highlight + scroll (desktop), tap popover (mobile).
 // The full point-by-point list below stays available on all sizes.
