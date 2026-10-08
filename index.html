@@ -422,8 +422,8 @@
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="hero-tag fade-up" data-t="hero_tag">EV és Hibrid Akkumulátor Specialisták</div>
-  <h1 class="fade-up delay-1" data-t-html="hero_h1">Tudd meg, mi az <em>akkumulátorod</em> valódi állapota.</h1>
-  <p class="hero-sub fade-up delay-2" data-t="hero_sub">Magasfeszültségű akkumulátor-diagnosztika elektromos és hibrid járművekhez — kiszállunk hozzád, elvégezzük a vizsgálatot, és átadunk egy CAR REMARKETING ASSOCIATION EUROPE által hitelesített akkumulátor-egészségügyi jelentést.</p>
+  <h1 class="fade-up delay-1" data-t-html="hero_h1">Akkumulátor állapot diagnosztika és <em>SOH mérés</em></h1>
+      <p class="hero-sub fade-up delay-2" data-t="hero_sub">Elektromos és hibrid járművekhez — kiszállással és CAR REMARKETING ASSOCIATION EUROPE által hitelesített akkumulátor-állapot jelentéssel</p>
   <div class="hero-actions fade-up delay-3">
     <a href="#contact" class="btn-primary">
       <span data-t="hero_cta_book">Ajánlatkérés</span>
@@ -702,21 +702,42 @@
             <span class="chip"><span class="dot" style="background:#e2231a">!</span> Nem OK</span>
           </div>
           <table class="rb-cells">
+            <colgroup><col style="width:24%"><col style="width:10%"><col span="8"></colgroup>
             <thead>
               <tr><th colspan="2">Modul</th><th class="grp-cella" colspan="8">Cella</th></tr>
               <tr><th></th><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th></tr>
             </thead>
             <tbody id="rb-cells-body"><!-- rows injected by script --></tbody>
           </table>
+
+          <div class="rb-bar">Modul hőmérséklet információk</div>
+          <div class="rb-kv-grid">
+            <div class="rb-kv"><span class="k">Maximum hőmérséklet:</span><span class="v">27.4 °C</span></div>
+            <div class="rb-kv"><span class="k">Minimum hőmérséklet:</span><span class="v">26.4 °C</span></div>
+            <div class="rb-kv"><span class="k">Átlagos hőmérséklet:</span><span class="v">27 °C</span></div>
+          </div>
+          <div class="rb-legend-scale">
+            <span>Alacsony</span><span class="grad"></span><span>Magas</span>
+            <span class="chip"><span class="dot" style="background:#f0a800">!</span> Figyelmeztetés</span>
+            <span class="chip"><span class="dot" style="background:#e2231a">!</span> Nem OK</span>
+          </div>
+          <table class="rb-cells">
+            <colgroup><col style="width:24%"><col span="8"></colgroup>
+            <thead>
+              <tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th></tr>
+            </thead>
+            <tbody id="rb-temp-body"><!-- rows injected by script --></tbody>
+          </table>
         </div>
-        <button type="button" class="report-pin" data-pin="1" style="left:86%; top:4.5%;" aria-label="1">1</button>
-        <button type="button" class="report-pin" data-pin="2" style="left:20%; top:19.5%;" aria-label="2">2</button>
-        <button type="button" class="report-pin" data-pin="3" style="left:9%; top:26.5%;" aria-label="3">3</button>
-        <button type="button" class="report-pin" data-pin="4" style="left:52%; top:28%;" aria-label="4">4</button>
-        <button type="button" class="report-pin" data-pin="5" style="left:50%; top:35.8%;" aria-label="5">5</button>
-        <button type="button" class="report-pin" data-pin="6" style="left:28%; top:47%;" aria-label="6">6</button>
-        <button type="button" class="report-pin" data-pin="7" style="left:24%; top:61.5%;" aria-label="7">7</button>
-        <button type="button" class="report-pin" data-pin="8" style="left:50%; top:82.5%;" aria-label="8">8</button>
+        <button type="button" class="report-pin" data-pin="1" style="left:86%; top:3.2%;" aria-label="1">1</button>
+        <button type="button" class="report-pin" data-pin="2" style="left:20%; top:13.7%;" aria-label="2">2</button>
+        <button type="button" class="report-pin" data-pin="3" style="left:9%; top:18.6%;" aria-label="3">3</button>
+        <button type="button" class="report-pin" data-pin="4" style="left:52%; top:19.7%;" aria-label="4">4</button>
+        <button type="button" class="report-pin" data-pin="5" style="left:50%; top:25.1%;" aria-label="5">5</button>
+        <button type="button" class="report-pin" data-pin="6" style="left:28%; top:33.0%;" aria-label="6">6</button>
+        <button type="button" class="report-pin" data-pin="7" style="left:24%; top:43.2%;" aria-label="7">7</button>
+        <button type="button" class="report-pin" data-pin="8" style="left:50%; top:57.9%;" aria-label="8">8</button>
+        <button type="button" class="report-pin" data-pin="9" style="left:50%; top:85%;" aria-label="9">9</button>
         <div class="report-popover" role="dialog" aria-hidden="true">
           <button type="button" class="report-popover__close" aria-label="Bezárás"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
           <span class="report-popover__num"></span>
@@ -740,6 +761,7 @@
       <li class="legend-item" data-leg="6"><span class="legend-num">6</span><div><h4 data-t="leg5_t">Hibakód-ellenőrzés</h4><p data-t="leg5_d">Az akkumulátor-kezelő rendszer (BMS) által tárolt hibakódok (DTC) megjelenítése és ellenőrzése.</p></div></li>
       <li class="legend-item" data-leg="7"><span class="legend-num">7</span><div><h4 data-t="leg6_t">Modul- és cellafeszültség</h4><p data-t="leg6_d">Részletes elemzés a modul- és cellafeszültségekről, a gyártó által megadott értékekkel összehasonlítva.</p></div></li>
       <li class="legend-item" data-leg="8"><span class="legend-num">8</span><div><h4 data-t="leg7_t">Cellánkénti részletes táblázat</h4><p data-t="leg7_d">Minden modul és minden egyes cella feszültsége egy helyen, színkódolt „hőtérképként”, amely azonnal kiemeli a leggyengébb cellákat.</p></div></li>
+      <li class="legend-item" data-leg="9"><span class="legend-num">9</span><div><h4 data-t="leg9_t">Modulonkénti hőmérséklet</h4><p data-t="leg9_d">A hőmérséklet minden modulnál külön, színkódolt táblázatban — így azonnal látszik, ha egy modul melegebb a többinél.</p></div></li>
     </ol>
     </div>
   </div>
@@ -866,8 +888,8 @@ const T = {
   en: {
     nav_how:"How it works", nav_diag:"Diagnostics", nav_report:"Certification", nav_why:"Who it's for", nav_price:"Pricing", nav_contact:"Contact", nav_cta:"Request a Quote",
     hero_tag:"EV & Hybrid Battery Specialists",
-    hero_h1:"Know your <em>battery's</em> true health.",
-    hero_sub:"High-voltage battery diagnostics for electric and hybrid vehicles — we come to you, perform the assessment, and hand you a battery health report certified by the CAR REMARKETING ASSOCIATION EUROPE.",
+    hero_h1:"Battery diagnostics and <em>SOH test</em>",
+    hero_sub:"For electric and hybrid vehicles — we come to you, perform the assessment, and hand you a battery health report certified by the CAR REMARKETING ASSOCIATION EUROPE.",
     hero_cta_book:"Request a Quote", hero_cta_how:"See how it works",
     badge_cara:"CARA Approved Reports", badge_mobile:"We Come To You", badge_same_day:"Results Same Day", badge_all_ev:"Almost Every EV & Hybrid Model",
     how_label:"Process", how_title:"Four steps. Zero hassle.",
@@ -898,12 +920,13 @@ const T = {
     legend_title:"What's in the report?",
     leg1_t:"Industry standard", leg1_d:"Our diagnostics use CARA-approved, certified Autel instruments — your guarantee of an independent, objective measurement that meets industry standards.",
     leg2_t:"Vehicle & test data", leg2_d:"The vehicle's and battery's unique identifiers, model data, and the exact test date — everything that ties the report unambiguously to the vehicle.",
-    leg3_t:"Battery State of Health (SOH)", leg3_d:"Detailed battery analytics: objective data on cell health, temperature distribution, and how balanced the voltage levels are across the whole pack.",
+    leg3_t:"Battery State of Health (SOH)", leg3_d:"The battery's State of Health (SOH) indicates, as a percentage, its current maximum capacity compared to its original factory condition.",
     leg4_t:"Estimated range & energy", leg4_d:"Current capacity relative to the factory value, expressed in kWh and estimated WLTP range (km).",
     leg5_t:"Fault-code check", leg5_d:"Display and review of any fault codes (DTCs) stored by the Battery Management System (BMS).",
     leg6_t:"Module & cell voltage", leg6_d:"Detailed analysis of module and cell voltages, compared against the manufacturer's specified values.",
     leg7_t:"Per-cell detailed table", leg7_d:"Every module and every individual cell voltage in one place, as a colour-coded “heat map” that instantly highlights the weakest cells.",
     leg8_t:"Temperature consistency", leg8_d:"Per-module temperatures with min/max/average values, so you can see how evenly the pack is cooled.",
+    leg9_t:"Per-module temperature", leg9_d:"Each module's temperature in its own color-coded table, so a module running warmer than the rest stands out at a glance.",
     why_label:"Who it's for", why_title:"Why this is useful for you",
     why_sub:"Whether you're selling, buying, or simply driving your EV — an independent battery report puts the facts on your side.",
     why1_title:"If you're selling your car", why1_desc:"Sell faster and for a higher price! On the used EV market, buyers' biggest fear is the unknown condition of the battery. With an independent, professional battery diagnostic certificate, you make the condition of the car's most valuable component transparent and quantifiable. This trust-building document not only shortens the decision process, but thanks to the credible condition assessment, also helps you achieve an above-market sale price.",
@@ -942,8 +965,8 @@ const T = {
   hu: {
     nav_how:"Hogyan működik", nav_diag:"Diagnosztika", nav_report:"Certifikáció", nav_why:"Kinek hasznos", nav_price:"Árak", nav_contact:"Kapcsolat", nav_cta:"Ajánlatkérés",
     hero_tag:"EV és Hibrid Akkumulátor Specialisták",
-    hero_h1:"Tudd meg, mi az <em>akkumulátorod</em> valódi állapota.",
-    hero_sub:"Magasfeszültségű akkumulátor-diagnosztika elektromos és hibrid járművekhez — kiszállunk hozzád, elvégezzük a vizsgálatot, és átadunk egy CAR REMARKETING ASSOCIATION EUROPE által hitelesített akkumulátor-egészségügyi jelentést.",
+    hero_h1:"Akkumulátor állapot diagnosztika és <em>SOH mérés</em>",
+    hero_sub:"Elektromos és hibrid járművekhez — kiszállással és CAR REMARKETING ASSOCIATION EUROPE által hitelesített akkumulátor-állapot jelentéssel",
     hero_cta_book:"Ajánlatkérés", hero_cta_how:"Hogyan működik",
     badge_cara:"CARA Tanúsított Jelentés", badge_mobile:"Kiszállunk Hozzád", badge_same_day:"Aznapi Eredmény", badge_all_ev:"Szinte Minden EV és Hibrid Típushoz",
     how_label:"Folyamat", how_title:"Négy lépés. Semmi bonyodalom.",
@@ -974,12 +997,13 @@ const T = {
     legend_title:"Mit tartalmaz a jelentés?",
     leg1_t:"Iparági standard", leg1_d:"Diagnosztikánk során a CARA által jóváhagyott, hitelesített Autel műszereket használunk — a független, iparági standardnak megfelelő, objektív mérés garanciája.",
     leg2_t:"Jármű- és vizsgálati adatok", leg2_d:"A jármű és az akkumulátor egyedi azonosítói, típusadatai és a vizsgálat pontos időpontja — minden, ami a jelentést egyértelműen a járműhöz köti.",
-    leg3_t:"Akkumulátor egészségi állapot (SOH)", leg3_d:"Részletes akkumulátor-analitika: objektív adatok a cellák egészségi állapotáról, a hőmérséklet-eloszlásról és a feszültségszintek kiegyensúlyozottságáról a teljes csomagban.",
+    leg3_t:"Akkumulátor egészségi állapot (SOH)", leg3_d:"Az akkumulátor egészségi állapota (State of Health, SOH) azt mutatja meg százalékban, hogy az akkumulátor jelenlegi maximális kapacitása mennyi az eredeti, gyári állapotához képest.",
     leg4_t:"Becsült hatótáv és energia", leg4_d:"A jelenlegi kapacitás a gyári értékhez viszonyítva, kWh-ban és becsült WLTP-hatótávban (km) kifejezve.",
     leg5_t:"Hibakód-ellenőrzés", leg5_d:"Az akkumulátor-kezelő rendszer (BMS) által tárolt hibakódok (DTC) megjelenítése és ellenőrzése.",
     leg6_t:"Modul- és cellafeszültség", leg6_d:"Részletes elemzés a modul- és cellafeszültségekről, a gyártó által megadott értékekkel összehasonlítva.",
     leg7_t:"Cellánkénti részletes táblázat", leg7_d:"Minden modul és minden egyes cella feszültsége egy helyen, színkódolt „hőtérképként”, amely azonnal kiemeli a leggyengébb cellákat.",
     leg8_t:"Hőmérséklet-konzisztencia", leg8_d:"Modulonkénti hőmérsékletek a min./max./átlag értékekkel, hogy látható legyen, mennyire egyenletes a csomag hűtése.",
+    leg9_t:"Modulonkénti hőmérséklet", leg9_d:"A hőmérséklet minden modulnál külön, színkódolt táblázatban — így azonnal látszik, ha egy modul melegebb a többinél.",
     why_label:"Kinek hasznos", why_title:"Miért hasznos ez neked?",
     why_sub:"Akár eladnád, akár megvennéd, akár csak ismerni szeretnéd az autód — egy független akkumulátor-jelentés a te oldaladra állítja a tényeket.",
     why1_title:"Ha eladnád az autódat", why1_desc:"Értékesíts gyorsabban és magasabb áron! A használt elektromos autók piacán a vevők legnagyobb félelme az akkumulátor ismeretlen állapota. Egy független, professzionális akkumulátor-diagnosztikai tanúsítvány birtokában átláthatóvá és számszerűsíthetővé teszed az autó legértékesebb alkatrészének állapotát. Ezzel a bizalomépítő dokumentummal nemcsak a döntés folyamatát rövidítheted le, de a hiteles állapotfelmérésnek köszönhetően könnyebben érhetsz el piaci ár feletti eladási értéket is.",
@@ -1402,6 +1426,23 @@ document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
     }
     html += '</tr>';
   }
+  body.innerHTML = html;
+})();
+
+// Module temperature heatmap for the sample report (one sensor pair per module, first column only).
+(function() {
+  const body = document.getElementById('rb-temp-body');
+  if (!body) return;
+  const RB_TEMPS = [27.1,26.8,27.2,26.6,27,26.9,27.3,26.7,27.1,26.5,27,27.2,26.9,27.4,26.8,27.1,26.6,27,27.3,26.4,26.9,27.2,27,27.1];
+  const lo = Math.min(...RB_TEMPS), hi = Math.max(...RB_TEMPS), span = hi - lo || 1;
+  let html = '';
+  RB_TEMPS.forEach((t, i) => {
+    const n = i + 1;
+    const a = (0.10 + ((t - lo) / span) * 0.55).toFixed(2);
+    html += '<tr><td class="rb-mod">M' + n + ' (T' + (2 * n - 1) + '–T' + (2 * n) + ')</td>' +
+      '<td style="background:rgba(31,184,102,' + a + ')">' + t + ' °C</td>' +
+      '<td></td>'.repeat(7) + '</tr>';
+  });
   body.innerHTML = html;
 })();
 
