@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
+<meta charset="UTF-8">
 <script>
   // Valid coupon codes. Add or remove entries here (case-insensitive, keep them uppercase).
   const COUPON_CODES = [
@@ -27,28 +28,62 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 </script>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VoltCheck — EV Akkumulátor Diagnosztika</title>
-<meta name="description" content="Mobil akkumulátor-diagnosztika elektromos és hibrid járművekhez. Kiszállunk hozzád, elvégezzük a vizsgálatot, és átadunk egy CARA-tanúsított akkumulátor-egészségügyi jelentést — aznap.">
+<title>VoltCheck — Mobil EV akkumulátor diagnosztika</title>
+<meta name="description" content="Mobil akkumulátor-diagnosztika elektromos és hibrid autókhoz. Kiszállunk, megmérjük az akksi állapotát (SOH), és aznap átadjuk a CARA-tanúsított jelentést.">
+<meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="theme-color" content="#0a0a0a">
 <link rel="canonical" href="https://voltcheck.hu/">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%230a0a0a'/%3E%3Cpath d='M13 10V3L4 14h7v7l9-11h-7z' fill='%23c8f065'/%3E%3C/svg%3E">
+<link rel="alternate" hreflang="hu" href="https://voltcheck.hu/">
+<link rel="alternate" hreflang="x-default" href="https://voltcheck.hu/">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="hu_HU">
 <meta property="og:locale:alternate" content="en_GB">
 <meta property="og:site_name" content="VoltCheck">
-<meta property="og:title" content="VoltCheck — EV Akkumulátor Diagnosztika">
+<meta property="og:title" content="VoltCheck — Mobil EV akkumulátor diagnosztika">
 <meta property="og:description" content="Mobil akkumulátor-diagnosztika elektromos és hibrid járművekhez. Kiszállunk hozzád, és aznap kiállítjuk a CARA-tanúsított jelentést.">
 <meta property="og:url" content="https://voltcheck.hu/">
 <meta property="og:image" content="https://voltcheck.hu/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="VoltCheck — mobil EV akkumulátor diagnosztika">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="VoltCheck — EV Akkumulátor Diagnosztika">
+<meta name="twitter:title" content="VoltCheck — Mobil EV akkumulátor diagnosztika">
 <meta name="twitter:description" content="Mobil akkumulátor-diagnosztika elektromos és hibrid járművekhez. CARA-tanúsított jelentés aznap.">
 <meta name="twitter:image" content="https://voltcheck.hu/og-image.png">
+<meta name="twitter:image:alt" content="VoltCheck — mobil EV akkumulátor diagnosztika">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutomotiveBusiness",
+  "@id": "https://voltcheck.hu/#business",
+  "name": "VoltCheck",
+  "url": "https://voltcheck.hu/",
+  "logo": "https://voltcheck.hu/favicon-512.png",
+  "image": "https://voltcheck.hu/og-image.png",
+  "description": "Mobil akkumulátor-diagnosztika elektromos és hibrid autókhoz. Kiszállunk, megmérjük az akksi állapotát (SOH), és aznap átadjuk a CARA-tanúsított jelentést.",
+  "telephone": "+36203863602",
+  "email": "info@voltcheck.hu",
+  "areaServed": {"@type": "Country", "name": "Magyarország"},
+  "inLanguage": "hu",
+  "makesOffer": [
+    {"@type": "Offer", "name": "EV akkumulátor diagnosztika – Budapest és Pest megye", "price": "34000", "priceCurrency": "HUF",
+     "itemOffered": {"@type": "Service", "name": "Mobil EV akkumulátor-diagnosztika és CARA-tanúsított SOH jelentés"}},
+    {"@type": "Offer", "name": "EV akkumulátor diagnosztika – Magyarország egyéb területei", "price": "44000", "priceCurrency": "HUF",
+     "itemOffered": {"@type": "Service", "name": "Mobil EV akkumulátor-diagnosztika és CARA-tanúsított SOH jelentés"}}
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
@@ -411,7 +446,7 @@
 </head>
 <body>
 
-<nav>
+<nav aria-label="Főmenü">
   <a href="#" class="logo" aria-label="VoltCheck"><span class="logo-dot"></span>VoltCheck</a>
   <ul class="nav-links">
     <li><a href="#how-it-works" data-t="nav_how">Hogyan működik</a></li>
@@ -447,6 +482,7 @@
   <a href="#contact" class="mobile-menu-cta" data-t="nav_cta">Ajánlatkérés</a>
 </div>
 
+<main>
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
@@ -643,7 +679,7 @@
   <div class="report-showcase">
     <figure class="cara-report fade-up">
       <div class="cara-report-media">
-        <div class="report-doc" aria-label="VoltCheck akkumulátor-állapotjelentés mintaoldal (példa adatokkal)">
+        <div class="report-doc" role="group" aria-label="VoltCheck akkumulátor-állapotjelentés mintaoldal (példa adatokkal)">
           <header class="rb-doc-head">
             <div class="rb-brand">
               <svg class="rb-bolt" viewBox="0 0 24 24" fill="none"><path d="M13 10V3L4 14h7v7l9-11h-7z" fill="#1fb866"/></svg>
@@ -658,7 +694,7 @@
             </div>
           </header>
 
-          <h2 class="rb-title">Akkumulátor-állapotjelentés</h2>
+          <div class="rb-title">Akkumulátor-állapotjelentés</div>
           <div class="rb-title-sub">SOH Gyorsteszt</div>
 
           <div class="rb-bar">Jármű adatok</div>
@@ -710,7 +746,7 @@
           </div>
 
           <div class="rb-divider"></div>
-          <h3 class="rb-section-title">Teszt paraméterek</h3>
+          <div class="rb-section-title">Teszt paraméterek</div>
 
           <div class="rb-bar">Modul- és cella feszültség információk</div>
           <div class="rb-kv-grid">
@@ -899,6 +935,7 @@
   </div>
 </section>
 
+</main>
 <footer>
   <div class="footer-logo"><span class="logo-dot"></span>VoltCheck</div>
   <p data-t="footer_tagline">Mobil EV Akkumulátor Diagnosztika · CARA Tanúsított Jelentések</p>
@@ -1073,7 +1110,7 @@ const T = {
     success_again:"Új időpontfoglalás",
     footer_tagline:"Mobil EV Akkumulátor Diagnosztika · CARA Tanúsított Jelentések",
     footer_copy:"© {year} VoltCheck. Minden jog fenntartva.",
-    doc_title:"VoltCheck — EV Akkumulátor Diagnosztika"
+    doc_title:"VoltCheck — Mobil EV akkumulátor diagnosztika"
   }
 };
 
