@@ -86,6 +86,14 @@ ${jsonLd ? `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script
     <li><a href="/#contact">Kapcsolat</a></li>
   </ul>
   <div class="nav-right">
+    <div class="lang-switch" aria-hidden="true">
+      <span class="lang-btn">EN</span>
+      <span class="lang-btn">HU</span>
+    </div>
+    <a href="tel:+36203863602" class="nav-phone" aria-label="+36 20 386 3602">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+      <span>+36 20 386 3602</span>
+    </a>
     <a href="/#contact" class="nav-cta">Ajánlatkérés</a>
     <button class="nav-toggle" type="button" aria-label="Menü" aria-controls="mobile-menu" aria-expanded="false">
       <svg class="icon-open" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -100,6 +108,7 @@ ${jsonLd ? `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script
   <a href="/#pricing">Árak</a>
   <a href="/blog/">Blog</a>
   <a href="/#contact">Kapcsolat</a>
+  <a href="tel:+36203863602" class="mobile-menu-phone">+36 20 386 3602</a>
   <a href="/#contact" class="mobile-menu-cta">Ajánlatkérés</a>
 </div>
 <main>
@@ -141,13 +150,24 @@ function postPage(p) {
     author: { '@type': 'Organization', name: 'VoltCheck', url: `${SITE}/` },
     publisher: { '@type': 'Organization', name: 'VoltCheck', url: `${SITE}/` },
   };
-  const body = `<article class="post">
-  <a class="back" href="/blog/">← Összes bejegyzés</a>
-  <h1>${esc(p.title)}</h1>
-  <time datetime="${isoDate(p.date)}">${fmtDate(p.date)}</time>
+  const body = `<header class="blog-hero">
+  <div class="hero-bg"></div><div class="hero-grid"></div>
+  <div class="blog-hero-inner">
+    <a class="back" href="/blog/">← Összes bejegyzés</a>
+    <p class="hero-tag"><time datetime="${isoDate(p.date)}">${fmtDate(p.date)}</time></p>
+    <h1>${esc(p.title)}</h1>
+    <p class="hero-sub">${esc(p.description)}</p>
+  </div>
+</header>
+<article class="post">
   <div class="post-body">
 ${p.html}
   </div>
+  <aside class="post-cta">
+    <h2>Kíváncsi az autód akkumulátorának állapotára?</h2>
+    <p>Kiszállunk, megmérjük, és aznap átadjuk a CARA-tanúsított jelentést.</p>
+    <a class="btn-primary" href="/#contact">Ajánlatkérés</a>
+  </aside>
 </article>`;
   return page({ title: `${p.title} | VoltCheck`, description: p.description, canonical, image, jsonLd, body });
 }
@@ -158,11 +178,17 @@ function indexPage(posts) {
         <time datetime="${isoDate(p.date)}">${fmtDate(p.date)}</time>
         <h2>${esc(p.title)}</h2>
         <p>${esc(p.description)}</p>
+        <span class="read-more">Elolvasom →</span>
       </a>
     </li>`).join('\n');
-  const body = `<section class="post-list">
-  <h1>Blog</h1>
-${posts.length ? `  <ul>\n${items}\n  </ul>` : '  <p>Hamarosan érkeznek az első bejegyzések.</p>'}
+  const body = `<header class="blog-hero blog-hero--compact">
+  <div class="hero-bg"></div><div class="hero-grid"></div>
+  <div class="blog-hero-inner">
+    <h1 class="hero-tag">Blog</h1>
+  </div>
+</header>
+<section class="post-list">
+${posts.length ? `  <ul>\n${items}\n  </ul>` : '  <p class="empty">Hamarosan érkeznek az első bejegyzések.</p>'}
 </section>`;
   return page({
     title: 'Blog | VoltCheck',
