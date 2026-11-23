@@ -1,0 +1,12 @@
+{
+  "name": "voltcheck",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-blog.mjs"
+  },
+  "devDependencies": {
+    "gray-matter": "4.0.3",
+    "marked": "15.0.12"
+  }
+}
