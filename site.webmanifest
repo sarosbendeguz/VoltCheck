@@ -1,7 +1,7 @@
 {
   "name": "VoltCheck",
   "short_name": "VoltCheck",
-  "description": "Mobil EV akkumulátor diagnosztika",
+  "description": "EV akkumulátor diagnosztika",
   "lang": "hu",
   "start_url": "/",
   "display": "browser",
