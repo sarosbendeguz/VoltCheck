@@ -83,7 +83,7 @@ ${jsonLd ? `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script
     <li><a href="/#why">Kinek hasznos</a></li>
     <li><a href="/#pricing">Árak</a></li>
     <li><a href="/blog/" aria-current="page">Blog</a></li>
-    <li><a href="/#contact">Kapcsolat</a></li>
+    <li><a href="/#contact">Érdeklődés</a></li>
   </ul>
   <div class="nav-right">
     <div class="lang-switch" aria-hidden="true">
@@ -107,7 +107,7 @@ ${jsonLd ? `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script
   <a href="/#why">Kinek hasznos</a>
   <a href="/#pricing">Árak</a>
   <a href="/blog/">Blog</a>
-  <a href="/#contact">Kapcsolat</a>
+  <a href="/#contact">Érdeklődés</a>
   <a href="tel:+36203863602" class="mobile-menu-phone">+36 20 386 3602</a>
   <a href="/#contact" class="mobile-menu-cta">Ajánlatkérés</a>
 </div>

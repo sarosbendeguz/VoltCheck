@@ -7,7 +7,8 @@
   const COUPON_CODES = [
     'KIA10',
     'BYD10',
-    'VW10'
+    'VW10',
+    'DECEMBER50'
   ];
 </script>
 <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-MHPZ8W5X"></script>
@@ -442,6 +443,49 @@
     .form-grid { grid-template-columns: 1fr; }
     footer { flex-direction: column; text-align: center; }
   }
+
+  /* December promo pop-up */
+  .promo-overlay { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; padding: 1.25rem; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px); }
+  .promo-overlay.open { display: flex; animation: promoFade 0.25s ease-out; }
+  .promo-box { position: relative; width: min(560px, 100%, 85vh); aspect-ratio: 1 / 1; border: 0.5px solid rgba(255,255,255,0.15); box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+  .promo-link { display: block; width: 100%; height: 100%; }
+  .promo-link img { display: block; width: 100%; height: 100%; }
+  /* Invisible button placed over the X drawn in the image */
+  .promo-close { position: absolute; top: 2.5%; right: 2.5%; width: 9%; height: 9%; min-width: 40px; min-height: 40px; padding: 0; border: 0; background: transparent; cursor: pointer; }
+  .promo-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @keyframes promoFade { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: none; } }
+
+  /* December promo card in the hero (replaces the battery animation while the promo runs) */
+  .hero-promo ~ .hero-visual { display: none; }
+  .hero-promo { position: absolute; z-index: 2; right: clamp(3rem, 9vw, 11rem); top: 50%; transform: translateY(-50%); width: clamp(320px, 28vw, 400px); padding: 2.25rem 2rem 2rem; border: 0.5px solid rgba(200,240,101,0.35); border-radius: 20px; background: linear-gradient(160deg, rgba(200,240,101,0.08) 0%, rgba(255,255,255,0.02) 55%), rgba(10,10,10,0.85); box-shadow: 0 30px 80px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.02) inset; opacity: 0; animation: hero-visual-in 1s ease 0.3s forwards; }
+  .hp-label { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 8px; margin-bottom: 1rem; }
+  .hp-label::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+  .hp-main { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
+  .hp-pct { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(4rem, 6vw, 5.5rem); line-height: 0.9; letter-spacing: -0.04em; color: var(--white); }
+  .hp-off { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.4rem; letter-spacing: -0.01em; color: var(--accent); text-transform: uppercase; }
+  .hp-desc { font-size: 0.95rem; font-weight: 300; color: var(--gray); line-height: 1.6; margin: 0.9rem 0 1.5rem; }
+  .hp-coupon { display: flex; align-items: center; gap: 0.75rem; padding: 0.7rem 0.7rem 0.7rem 1rem; border: 1px dashed rgba(248,246,241,0.35); border-radius: 12px; margin-bottom: 1.25rem; }
+  .hp-coupon-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); }
+  .hp-code { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.04em; color: var(--white); flex: 1; }
+  .hp-copy { font-family: 'DM Sans', sans-serif; font-size: 0.8rem; color: var(--white); background: rgba(255,255,255,0.06); border: 0.5px solid var(--border); border-radius: 100px; padding: 0.45rem 0.9rem; cursor: pointer; transition: background 0.2s, color 0.2s; white-space: nowrap; }
+  .hp-copy:hover { background: rgba(255,255,255,0.12); }
+  .hp-copy.copied { color: var(--black); background: var(--accent); }
+  .hero-promo .btn-primary { width: 100%; justify-content: center; }
+
+  @media (max-width: 1024px) {
+    .hero-promo { position: relative; right: auto; top: auto; transform: none; width: 100%; max-width: 640px; margin-bottom: 2.5rem; padding: 1.5rem; }
+  }
+  @media (max-width: 768px) {
+    .hero { padding-top: 6rem; }
+    .hero-promo { padding: 1.25rem; border-radius: 16px; margin-bottom: 2rem; }
+    .hp-label { margin-bottom: 0.6rem; }
+    .hp-pct { font-size: 3.2rem; }
+    .hp-off { font-size: 1.1rem; }
+    .hp-desc { font-size: 0.9rem; margin: 0.5rem 0 1rem; }
+    .hp-coupon { margin-bottom: 1rem; }
+    .hp-coupon-label { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .hero-promo { animation: none; opacity: 1; } }
 </style>
 </head>
 <body>
@@ -454,7 +498,7 @@
     <li><a href="#why" data-t="nav_why">Kinek hasznos</a></li>
     <li><a href="#pricing" data-t="nav_price">Árak</a></li>
     <li><a href="/blog/" data-t="nav_blog">Blog</a></li>
-    <li><a href="#contact" data-t="nav_contact">Kapcsolat</a></li>
+    <li><a href="#contact" data-t="nav_contact">Érdeklődés</a></li>
   </ul>
   <div class="nav-right">
     <div class="lang-switch" role="group" aria-label="Language">
@@ -479,7 +523,7 @@
   <a href="#why" data-t="nav_why">Kinek hasznos</a>
   <a href="#pricing" data-t="nav_price">Árak</a>
   <a href="/blog/" data-t="nav_blog">Blog</a>
-  <a href="#contact" data-t="nav_contact">Kapcsolat</a>
+  <a href="#contact" data-t="nav_contact">Érdeklődés</a>
   <a href="tel:+36203863602" class="mobile-menu-phone">+36 20 386 3602</a>
   <a href="#contact" class="mobile-menu-cta" data-t="nav_cta">Ajánlatkérés</a>
 </div>
@@ -488,6 +532,20 @@
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
+  <aside class="hero-promo" id="hero-promo" aria-labelledby="hp-label">
+    <div class="hp-label" id="hp-label" data-t="promo_label">Decemberi akció</div>
+    <div class="hp-main"><span class="hp-pct">50%</span><span class="hp-off" data-t="promo_off">kedvezmény</span></div>
+    <p class="hp-desc" data-t="promo_desc">Minden december 1. és 31. közötti időpontra</p>
+    <div class="hp-coupon">
+      <span class="hp-coupon-label" data-t="promo_code_label">Kuponkód</span>
+      <span class="hp-code">DECEMBER50</span>
+      <button type="button" class="hp-copy" id="hp-copy" data-t="promo_copy">Másolás</button>
+    </div>
+    <a href="#contact" class="btn-primary" data-promo-apply>
+      <span data-t="promo_cta">Foglalj időpontot</span>
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </aside>
   <div class="hero-tag fade-up" data-t="hero_tag">EV és Hibrid Akkumulátor Specialisták</div>
   <h1 class="fade-up delay-1" data-t-html="hero_h1">Akkumulátor állapot diagnosztika és <em>SOH mérés</em></h1>
       <p class="hero-sub fade-up delay-2" data-t="hero_sub">Elektromos és hibrid járművekhez — kiszállással és CAR REMARKETING ASSOCIATION EUROPE által hitelesített akkumulátor-állapot jelentéssel</p>
@@ -894,9 +952,9 @@
 
 <section id="contact">
   <div style="text-align:center;max-width:520px;margin:0 auto;" class="fade-up">
-    <div class="section-label" data-t="form_label">Kapcsolatfelvétel</div>
+    <div class="section-label" data-t="form_label">Érdeklődés</div>
     <h2 class="section-title" data-t="form_title">Kérj ajánlatot</h2>
-    <p class="section-sub" style="margin:0 auto;" data-t="form_sub">Mesélj a járművedről és felvesszük veled a kapcsolatot. Az ajánlatkérés nem jár fizetési kötelezettséggel.</p>
+    <p class="section-sub" style="margin:0 auto;" data-t="form_sub">Kérdésed van a vizsgálattal kapcsolatban, kíváncsi vagy, mi lesz a tanúsítványban, vagy csak beszélnél az autód akkumulátoráról? Hagyd meg az elérhetőségedet, és visszahívunk. Ingyenes, és semmire nem kötelez.</p>
   </div>
   <div class="form-wrapper">
     <form id="booking-form" class="fade-up delay-1" novalidate>
@@ -906,8 +964,8 @@
         <div class="form-group"><label for="lname" data-t="f_lname">Vezetéknév</label><input type="text" id="lname" name="lname" maxlength="50" autocomplete="family-name" data-ph="ph_lname" placeholder="Kovács" required></div>
         <div class="form-group"><label for="email" data-t="f_email">E-mail cím</label><input type="email" id="email" name="email" maxlength="100" autocomplete="email" placeholder="alex@email.com" required></div>
         <div class="form-group"><label for="phone" data-t="f_phone">Telefonszám</label><input type="tel" id="phone" name="phone" maxlength="30" autocomplete="tel" data-ph="ph_phone" placeholder="+36 30 000 0000" required></div>
-        <div class="form-group"><label for="make" data-t="f_make">Jármű márkája</label><div class="combo"><input type="text" id="make" name="make" maxlength="40" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="make-listbox" data-ph="ph_make" placeholder="pl. BMW" required><ul class="combo-list" id="make-listbox" role="listbox" hidden></ul></div></div>
-        <div class="form-group"><label for="model" data-t="f_model">Modell</label><div class="combo"><input type="text" id="model" name="model" maxlength="60" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="model-listbox" data-ph="ph_model" placeholder="pl. i4" required><ul class="combo-list" id="model-listbox" role="listbox" hidden></ul></div></div>
+        <div class="form-group"><label for="make" data-t="f_make">Jármű márkája (opcionális)</label><div class="combo"><input type="text" id="make" name="make" maxlength="40" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="make-listbox" data-ph="ph_make" placeholder="pl. BMW"><ul class="combo-list" id="make-listbox" role="listbox" hidden></ul></div></div>
+        <div class="form-group"><label for="model" data-t="f_model">Modell (opcionális)</label><div class="combo"><input type="text" id="model" name="model" maxlength="60" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="model-listbox" data-ph="ph_model" placeholder="pl. i4"><ul class="combo-list" id="model-listbox" role="listbox" hidden></ul></div></div>
         <div class="form-group"><label for="year" data-t="f_year">Évjárat</label><input type="number" id="year" name="year" min="1995" max="2027" inputmode="numeric" data-ph="ph_year" placeholder="pl. 2022" required></div>
         <div class="form-group"><label for="location" data-t="f_location">Helyszín</label><input type="text" id="location" name="location" maxlength="100" data-ph="ph_location" placeholder="Város, irányítószám" required></div>
         <div class="form-group full"><label for="coupon" data-t="f_coupon">Kuponkód (opcionális)</label><input type="text" id="coupon" name="coupon" maxlength="30" autocomplete="off" autocapitalize="characters" data-ph="ph_coupon" placeholder=""><div id="coupon-status" class="coupon-status" aria-live="polite"></div></div>
@@ -955,11 +1013,13 @@
 <script>
 const T = {
   en: {
-    nav_how:"How it works", nav_diag:"Diagnostics", nav_report:"Certification", nav_why:"Who it's for", nav_price:"Pricing", nav_contact:"Contact", nav_blog:"Blog", nav_cta:"Request a Quote",
+    nav_how:"How it works", nav_diag:"Diagnostics", nav_report:"Certification", nav_why:"Who it's for", nav_price:"Pricing", nav_contact:"Enquire", nav_blog:"Blog", nav_cta:"Request a Quote",
     hero_tag:"EV & Hybrid Battery Specialists",
     hero_h1:"Battery diagnostics and <em>SOH test</em>",
     hero_sub:"For electric and hybrid vehicles — we come to you, perform the assessment, and hand you a battery health report certified by the CAR REMARKETING ASSOCIATION EUROPE.",
     hero_cta_book:"Request a Quote", hero_cta_how:"See how it works",
+    promo_label:"December offer", promo_off:"off", promo_desc:"On every appointment between 1 and 31 December",
+    promo_code_label:"Coupon code", promo_copy:"Copy", promo_copied:"Copied", promo_cta:"Book an appointment",
     badge_cara:"CARA Approved Reports", badge_mobile:"We Come To You", badge_same_day:"Results Same Day", badge_all_ev:"Almost Every EV & Hybrid Model",
     how_label:"Process", how_title:"Four steps. Zero hassle.",
     how_sub:"Book online, we arrive at your location, run the full diagnostic, and hand you a certified report — all in a single visit.",
@@ -1008,12 +1068,12 @@ const T = {
     price_region1:"Budapest and Pest county", price_region2:"Rest of Hungary",
     pf1:"Call-out to your chosen location", pf2:"Full high-voltage battery diagnostic",
     pf3:"CARA-certified report the same day", pf4:"Digital PDF and printed copy",
-    form_label:"Get in touch", form_title:"Request a quote",
-    form_sub:"Tell us about your vehicle and we'll be in touch. Requesting a quote carries no obligation to pay.",
+    form_label:"Enquire", form_title:"Request a quote",
+    form_sub:"Questions about the test, curious what the certificate will include, or just want to talk about your car's battery? Leave your details and we'll call you back. Free, with no obligation.",
     f_fname:"First name", ph_fname:"Alex", f_lname:"Last name", ph_lname:"Smith",
     f_email:"Email address", f_phone:"Phone number", ph_phone:"+44 7700 000000",
-    f_make:"Vehicle make", ph_make:"e.g. BMW",
-    f_model:"Model", ph_model:"e.g. i4",
+    f_make:"Vehicle make (optional)", ph_make:"e.g. BMW",
+    f_model:"Model (optional)", ph_model:"e.g. i4",
     f_year:"Year", ph_year:"e.g. 2022",
     f_location:"Your location", ph_location:"Town, postcode",
     f_message:"Additional notes", ph_message:"",
@@ -1035,11 +1095,13 @@ const T = {
     doc_title:"VoltCheck — EV Battery Diagnostics"
   },
   hu: {
-    nav_how:"Hogyan működik", nav_diag:"Diagnosztika", nav_report:"Certifikáció", nav_why:"Kinek hasznos", nav_price:"Árak", nav_contact:"Kapcsolat", nav_blog:"Blog", nav_cta:"Ajánlatkérés",
+    nav_how:"Hogyan működik", nav_diag:"Diagnosztika", nav_report:"Certifikáció", nav_why:"Kinek hasznos", nav_price:"Árak", nav_contact:"Érdeklődés", nav_blog:"Blog", nav_cta:"Ajánlatkérés",
     hero_tag:"EV és Hibrid Akkumulátor Specialisták",
     hero_h1:"Akkumulátor állapot diagnosztika és <em>SOH mérés</em>",
     hero_sub:"Elektromos és hibrid járművekhez — kiszállással és CAR REMARKETING ASSOCIATION EUROPE által hitelesített akkumulátor-állapot jelentéssel",
     hero_cta_book:"Ajánlatkérés", hero_cta_how:"Hogyan működik",
+    promo_label:"Decemberi akció", promo_off:"kedvezmény", promo_desc:"Minden december 1. és 31. közötti időpontra",
+    promo_code_label:"Kuponkód", promo_copy:"Másolás", promo_copied:"Másolva", promo_cta:"Foglalj időpontot",
     badge_cara:"CARA Tanúsított Jelentés", badge_mobile:"Kiszállunk Hozzád", badge_same_day:"Aznapi Eredmény", badge_all_ev:"Szinte Minden EV és Hibrid Típushoz",
     how_label:"Folyamat", how_title:"Négy lépés. Semmi bonyodalom.",
     how_sub:"Foglalj online, megérkezünk, elvégezzük a teljes vizsgálatot, és átadjuk a tanúsítványt — egyetlen látogatás alatt.",
@@ -1088,12 +1150,12 @@ const T = {
     price_region1:"Budapest és Pest megye", price_region2:"Az ország többi része",
     pf1:"Kiszállás a megadott helyszínre", pf2:"Teljes magasfeszültségű akkumulátor-diagnosztika",
     pf3:"CARA-tanúsított jelentés még aznap", pf4:"Digitális PDF és nyomtatott példány",
-    form_label:"Kapcsolatfelvétel", form_title:"Kérj ajánlatot",
-    form_sub:"Mesélj a járművedről és felvesszük veled a kapcsolatot. Az ajánlatkérés nem jár fizetési kötelezettséggel.",
+    form_label:"Érdeklődés", form_title:"Kérj ajánlatot",
+    form_sub:"Kérdésed van a vizsgálattal kapcsolatban, kíváncsi vagy, mi lesz a tanúsítványban, vagy csak beszélnél az autód akkumulátoráról? Hagyd meg az elérhetőségedet, és visszahívunk. Ingyenes, és semmire nem kötelez.",
     f_fname:"Keresztnév", ph_fname:"Péter", f_lname:"Vezetéknév", ph_lname:"Kovács",
     f_email:"E-mail cím", f_phone:"Telefonszám", ph_phone:"+36 30 000 0000",
-    f_make:"Jármű márkája", ph_make:"pl. BMW",
-    f_model:"Modell", ph_model:"pl. i4",
+    f_make:"Jármű márkája (opcionális)", ph_make:"pl. BMW",
+    f_model:"Modell (opcionális)", ph_model:"pl. i4",
     f_year:"Évjárat", ph_year:"pl. 2022",
     f_location:"Helyszín", ph_location:"Város, irányítószám",
     f_message:"Egyéb megjegyzés", ph_message:"",
@@ -1382,7 +1444,7 @@ form.addEventListener('submit', async (e) => {
   }
 
   // Required-field check
-  const required = ['fname','lname','email','phone','make','model','year','location'];
+  const required = ['fname','lname','email','phone','year','location'];
   let firstInvalid = null;
   required.forEach(k => {
     if (!v(k)) {
@@ -1444,14 +1506,14 @@ form.addEventListener('submit', async (e) => {
         name: `${v('fname')} ${v('lname')}`.trim(),
         email: v('email'),
         phone: v('phone'),
-        vehicle_make: v('make'),
-        vehicle_model: v('model'),
+        vehicle_make: v('make') || '-',
+        vehicle_model: v('model') || '-',
         vehicle_year: v('year'),
         location: v('location'),
         coupon: v('coupon') ? v('coupon').toUpperCase() : '-',
         message: v('message'),
         language: lang,
-        subject: `New Diagnostic Booking — ${v('fname')} ${v('lname')} — ${v('make')} ${v('model')} (${v('year')})`,
+        subject: `New Diagnostic Booking — ${v('fname')} ${v('lname')} — ${[v('make'), v('model')].filter(Boolean).join(' ') || 'Unknown vehicle'} (${v('year')})`,
         botcheck: ''
       })
     });
@@ -1644,6 +1706,73 @@ document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
 // Apply detected language (re-renders text + sets active lang button + html lang attr)
 setLang(lang);
+</script>
+
+<!-- December promo pop-up: shown once per browser session, until the end of 31 Dec 2026 -->
+<div class="promo-overlay" id="promo" role="dialog" aria-modal="true" aria-label="Decemberi akció: 50% kedvezmény, kuponkód DECEMBER50">
+  <div class="promo-box">
+    <a href="#contact" class="promo-link" id="promo-link">
+      <img src="assets/december-promo.jpg" width="1600" height="1600" alt="Minden december 1 és 31 közötti időpontra 50% kedvezmény. A kuponkód: DECEMBER50">
+    </a>
+    <button type="button" class="promo-close" id="promo-close" aria-label="Bezárás"></button>
+  </div>
+</div>
+<script>
+(function () {
+  // December promo (pop-up + hero card). After this moment both disappear and the battery animation returns.
+  const PROMO_END = new Date('2027-01-01T00:00:00+01:00');
+  const PROMO_CODE = 'DECEMBER50';
+  const KEY = 'promoDec50Seen';
+  const overlay = document.getElementById('promo');
+  const heroPromo = document.getElementById('hero-promo');
+
+  if (new Date() >= PROMO_END) {
+    overlay.remove();
+    heroPromo.remove();
+    return;
+  }
+
+  function applyCoupon() {
+    const input = document.getElementById('coupon');
+    if (input) { input.value = PROMO_CODE; input.dispatchEvent(new Event('input')); }
+  }
+
+  // Hero card: "Book" fills in the coupon, "Copy" copies the code
+  heroPromo.querySelector('[data-promo-apply]').addEventListener('click', applyCoupon);
+  const copyBtn = document.getElementById('hp-copy');
+  let copyTimer;
+  copyBtn.addEventListener('click', () => {
+    const done = () => {
+      copyBtn.textContent = T[lang].promo_copied;
+      copyBtn.classList.add('copied');
+      clearTimeout(copyTimer);
+      copyTimer = setTimeout(() => { copyBtn.textContent = T[lang].promo_copy; copyBtn.classList.remove('copied'); }, 2000);
+    };
+    if (navigator.clipboard) navigator.clipboard.writeText(PROMO_CODE).then(done, applyCoupon);
+    else applyCoupon();
+  });
+
+  // Pop-up: once per browser session
+  let seen = false;
+  try { seen = sessionStorage.getItem(KEY) === '1'; } catch (e) {}
+  if (seen) return;
+
+  function close() {
+    overlay.classList.remove('open');
+    document.removeEventListener('keydown', onKey);
+    try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
+  }
+  function onKey(e) { if (e.key === 'Escape') close(); }
+
+  document.getElementById('promo-close').addEventListener('click', close);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+  // Clicking the image jumps to the booking form with the coupon pre-filled
+  document.getElementById('promo-link').addEventListener('click', () => { close(); applyCoupon(); });
+
+  overlay.classList.add('open');
+  document.addEventListener('keydown', onKey);
+  document.getElementById('promo-close').focus({ preventScroll: true });
+})();
 </script>
 </body>
 </html>
